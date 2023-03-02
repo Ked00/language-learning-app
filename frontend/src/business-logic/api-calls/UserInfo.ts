@@ -1,7 +1,6 @@
 import axios from "axios";
-import {userInfo} from "../../types/userInfo";
 
-export function getUserInfo(func: () => void) {
+export function getUserInfo() {
   axios
     .get("/profile/profileInfo")
     .then((res) => {

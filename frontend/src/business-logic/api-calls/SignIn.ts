@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 
 export function useSignIn(email: string | null) {
   const navigate = useNavigate();
-
   axios
     .post("auth/login", {
       email: email,

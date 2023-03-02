@@ -1,7 +1,6 @@
-import React, {useEffect, useState, ChangeEvent} from "react";
-import {Avatar, Container} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
-import {Edit} from "@mui/icons-material";
+import {Avatar, Container} from "@mui/material";
 import axios from "axios";
 import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 import {useNavigate} from "react-router-dom";
@@ -11,14 +10,11 @@ import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {companyInfo} from "../../types/companyInfo";
+import {FormGroup} from "../../components/Inputs/FormGroup";
 
 // hooks
 import {useUpdateInputValue} from "../../hooks/textFieldInput";
 import {useSelected} from "../../hooks/selected";
-import {useRedirect} from "../../hooks/redirect";
-
-// types
-import {userInfo} from "../../types/userInfo";
 
 export function Profile() {
   const [user, setUser] = useState({email: ""});
@@ -27,11 +23,11 @@ export function Profile() {
   const updateInput = useUpdateInputValue();
 
   useEffect(() => {
-    axios.get("/profile/profileInfo").then((res) =>
-      setUser({email: res.data})
-    );
+    axios
+    .get("/profile/profileInfo")
+    .then((res) => setUser({email: res.data}));
   }, []);
-  
+
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -47,27 +43,21 @@ export function Profile() {
 
       <Container>
         <Form className="d-flex flex-column justify-content-center align-items-center">
-          <Form.Group className="w-100 mb-3" controlId="firstNameControl">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              placeholder={updateInput.userInput.first}
-              value={updateInput.userInput.first}
-              onChange={updateInput.updateInput}
-              name="first"
-              className="p-4"
-            />
-          </Form.Group>
+          <FormGroup
+            controlId="firstNameControl"
+            label="First Name"
+            name="first"
+            value={updateInput.userInput.first}
+            onChange={updateInput.updateInput}
+          />
 
-          <Form.Group className="w-100 mb-3" controlId="lastNameControl">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              placeholder={updateInput.userInput.last}
-              value={updateInput.userInput.last}
-              onChange={updateInput.updateInput}
-              name="last"
-              className="p-4"
-            />
-          </Form.Group>
+          <FormGroup
+            controlId="lastNameControl"
+            label="Last Name"
+            name="last"
+            value={updateInput.userInput.last}
+            onChange={updateInput.updateInput}
+          />
 
           <div className="w-100 text-center mt-3">
             <SelectLanguage
@@ -89,7 +79,9 @@ export function Profile() {
           className="w-100 my-3"
           background={companyInfo.company_color}
           // there has to be a better way
-          onClick={() => updateUserInfo(user.email, updateInput.userInput, controlSelected.selected)}
+          onClick={() =>
+            updateUserInfo(user.email, updateInput.userInput, controlSelected.selected)
+          }
         />
       </Container>
     </div>

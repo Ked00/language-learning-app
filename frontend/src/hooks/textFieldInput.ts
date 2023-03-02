@@ -15,6 +15,12 @@ export function useUpdateInputValue(): outPut {
     setUserInput((prev) => {
       return {...prev, [name]: newValue};
     });
+
+    const updateSelected = (value:string) => {
+      setUserInput(prev =>{
+        return {...prev, selected: newValue};
+      });
+    };
   };
 
   return {

@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import {auth, googleProvider} from "./firebaseConfig";
-import {getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import {signInWithPopup} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 
 import {outPut} from "../../types/authOutput";
-import {useSignIn} from "../api-calls/SignIn";
 import axios from "axios";
 
 export function GoogleAuth(): outPut {
