@@ -10,7 +10,6 @@ export function FaceBookAuth(): outPut {
   const [value, setValue] = useState<string | null>("");
   const navigate =  useNavigate()
 
-
   const handleClick = () => {
     signInWithPopup(auth, faceBookProvider).then((res) => {
       axios

@@ -2,16 +2,16 @@ import React, {useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
 import {Avatar, Container} from "@mui/material";
 import axios from "axios";
-import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 import {useNavigate} from "react-router-dom";
 
+import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 // components
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
 import {BlockButton} from "../../components/Buttons/BlockButton";
-import {companyInfo} from "../../types/companyInfo";
 import {FormGroup} from "../../components/Inputs/FormGroup";
-
+// types
+import {companyInfo} from "../../types/companyInfo";
 // hooks
 import {useUpdateInputValue} from "../../hooks/textFieldInput";
 import {useSelected} from "../../hooks/selected";
@@ -31,7 +31,6 @@ export function Profile() {
   return (
     <div className="vh-100">
       <MainNavbar />
-
       <div className="d-flex flex-column align-items-center mt-5">
         <h1>Edit Profile</h1>
         <Avatar

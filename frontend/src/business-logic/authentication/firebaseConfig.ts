@@ -3,12 +3,12 @@ import {getAuth, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
 import {getAnalytics} from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBBts12EZLy7SPskaK4-CVaBQXEzqDhSIM",
+  apiKey: process.env.REACT_APP_fire_appkey ,
   authDomain: "wroff-languageapp.firebaseapp.com",
   projectId: "wroff-languageapp",
   storageBucket: "wroff-languageapp.appspot.com",
   messagingSenderId: "571711243071",
-  appId: "1:571711243071:web:7075380964d80e1a13898a",
+  appId: process.env.REACT_APP_fire_appid,
   measurementId: "G-8GQMGRGH40",
 };
 

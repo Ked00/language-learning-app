@@ -7,7 +7,6 @@ type outPut = {
 
 export function useSelected():outPut {
   const [selected, SetSelected] = useState("");
-
   const updateSelected = (value:string) => {
     SetSelected(value);
   };
