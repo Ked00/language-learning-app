@@ -30,7 +30,7 @@ export function SelectLanguage(props: Props) {
         key={index}
         onClick={() => {
           props.controlSelected?.setSelected(data.data)
-          props.onClick!(data.data)
+          // props.onClick!(data.data)
         }}
       >
         {data.data}

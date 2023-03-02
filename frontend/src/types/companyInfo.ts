@@ -1,4 +1,4 @@
 export enum companyInfo{
-    companyName = "WROFF",
+    companyName = "Easy-Start",
     company_color = "#597EB1",
 }

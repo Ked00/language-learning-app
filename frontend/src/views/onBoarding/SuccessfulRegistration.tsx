@@ -1,20 +1,21 @@
-import {Container} from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import {Container} from "@mui/material";
+import {useNavigate} from "react-router-dom";
+
+// components
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {companyInfo} from "../../types/companyInfo";
 
 export function SuccessfulRegistration() {
-  const navigate = useNavigate()
-  const move = ()=>{
-    navigate("/dashboard")
-  }
+  const navigate = useNavigate();
+  const move = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="vh-100">
       <MainNavbar />
-
       <div className="h-50 mt-5 mb-3 d-flex justify-content-center align-items-center">
         <img src={require("../../images/succesfulRegistration.png")} />
       </div>

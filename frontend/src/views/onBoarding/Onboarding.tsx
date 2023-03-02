@@ -13,13 +13,12 @@ export function Onboarding() {
   const google = GoogleAuth();
   const faceBook = FaceBookAuth();
   
-
   return (
     <div className="vh-100">
       <OnboardingNav />
       <div className="h-50 my-5 text-center">
         <img
-          src={require("../../images/onBoardingImage.jpeg")}
+          src={require("../../images/onBoarding.jpg")}
           width="85%"
           height="100%"
         />

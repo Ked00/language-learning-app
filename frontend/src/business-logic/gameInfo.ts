@@ -1,8 +1,7 @@
 import {gameSettingInfo} from "../types/gameSettingInfo";
-import * as Logo from "../images/logo.png";
 
 export const languages: gameSettingInfo = [
-  {data: "Danish", img: Logo},
+  {data: "Danish"},
   {data: "Deutsch"},
   {data: "English"},
   {data: "Hebrew"},

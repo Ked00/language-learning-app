@@ -1,25 +1,34 @@
 import React, {useEffect, useState, ChangeEvent} from "react";
-import {Avatar, TextField, Container} from "@mui/material";
+import {Avatar, Container} from "@mui/material";
 import {Form} from "react-bootstrap";
 import {Edit} from "@mui/icons-material";
 import axios from "axios";
+import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
+import { useNavigate } from "react-router-dom";
 
 // components
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {companyInfo} from "../../types/companyInfo";
-import {useNavigate} from "react-router-dom";
 
 // hooks
 import {useUpdateInputValue} from "../../hooks/textFieldInput";
 import {useSelected} from "../../hooks/selected";
+import {useRedirect} from "../../hooks/redirect";
+
+// types
+import {userInfo} from "../../types/userInfo";
 
 export function Profile() {
-  const [user, setUser] = useState({email: "", first: "", last: ""});
-  const navigate = useNavigate();
-  const updateInput = useUpdateInputValue();
   const controlSelected = useSelected();
+  const updateInput = useUpdateInputValue();
+  const navigate = useNavigate()
+  const [user, setUser] = useState<userInfo>({
+    email: "",
+    first: "",
+    last: "",
+  });
 
   useEffect(() => {
     axios.get("/profile/profileInfo").then((res) =>
@@ -29,19 +38,7 @@ export function Profile() {
     );
   }, []);
 
-  const redirect = () => {
-    navigate("/subscription");
-  };
-
   // api needs type checking to make sure its getting the properties from user
-  const updateUserInfo = () => {
-    axios.post("profile/edit", {
-      email: user.email,
-      first_name: user.first,
-      last_name: user.last,
-      native_language: controlSelected.selected,
-    });
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -98,7 +95,7 @@ export function Profile() {
           </div>
         </Form>
 
-        <div className="mt-3" onClick={redirect}>
+        <div className="mt-3" onClick={()=> navigate("/subscription")}>
           <h5 className="text-danger">Premium Account</h5>
           <p className="text-secondary">Enjoy your learning without ads anymore</p>
         </div>
@@ -108,7 +105,7 @@ export function Profile() {
           type="contained"
           className="w-100 my-3"
           background={companyInfo.company_color}
-          onClick={updateUserInfo}
+          onClick={() => updateUserInfo(user, controlSelected.selected)}
         />
       </Container>
     </div>

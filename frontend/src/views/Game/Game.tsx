@@ -6,7 +6,6 @@ import axios from "axios";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
-import {InGameNavbar} from "../../components/Navigation/InGameNavbar";
 import {LearningLangugaeQuestion} from "../../components/inGame/LearningLanguageQuestion";
 import {NativeLanguageTranslation} from "../../components/inGame/NativeLanguageTranslation";
 import {TopicImage} from "../../components/inGame/TopicImage";
@@ -18,6 +17,7 @@ import {startListening, stopListening} from "../../business-logic/speech-api/spe
 // hooks
 import {useLoopArray} from "../../hooks/loopArray";
 import {useNavigate} from "react-router-dom";
+import { MainNavbar } from "../../components/Navigation/MainNavbar";
 
 export function Game() {
   const [info, setInfo] = useState({time: 30, sentence: 10, subject: "", language: ""});
@@ -158,7 +158,7 @@ export function Game() {
 
   return (
     <div className="vh-100">
-      <InGameNavbar />
+      <MainNavbar />
 
       <div className="text-md-center">
         <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${info.sentence}`}</h1>
