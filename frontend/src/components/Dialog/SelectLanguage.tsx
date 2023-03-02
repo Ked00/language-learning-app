@@ -18,7 +18,6 @@ type Props = {
 };
 
 export function SelectLanguage(props: Props) {
-  // const controlSelected = useSelected();
   const open = useVisible(false);
   const updateInput = useUpdateInputValue();
 
@@ -38,7 +37,7 @@ export function SelectLanguage(props: Props) {
     );
   });
 
-  const filterOptionList = languages.filter((item) => item.data === updateInput.userInput);
+  const filterOptionList = languages.filter((item) => item.data === updateInput.userInput.language);
 
   const filteredOptions = filterOptionList.map((item, index) => {
     return <p key={index}>{item.data}</p>;
@@ -63,9 +62,10 @@ export function SelectLanguage(props: Props) {
           </div>
           <TextField
             className="w-100 mb-3 p-2"
-            onChange={updateInput.updateInput}
             placeholder="Search for a langugae..."
-            value={updateInput.userInput}
+            name="language"      
+            onChange={updateInput.updateInput}
+            value={updateInput.userInput.language}
           />
 
           {filterOptionList.length == 0 ? allLanguageOptions : filteredOptions}

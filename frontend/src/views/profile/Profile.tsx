@@ -4,7 +4,7 @@ import {Form} from "react-bootstrap";
 import {Edit} from "@mui/icons-material";
 import axios from "axios";
 import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 // components
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
@@ -21,34 +21,17 @@ import {useRedirect} from "../../hooks/redirect";
 import {userInfo} from "../../types/userInfo";
 
 export function Profile() {
+  const [user, setUser] = useState({email: ""});
   const controlSelected = useSelected();
+  const navigate = useNavigate();
   const updateInput = useUpdateInputValue();
-  const navigate = useNavigate()
-  const [user, setUser] = useState<userInfo>({
-    email: "",
-    first: "",
-    last: "",
-  });
 
   useEffect(() => {
     axios.get("/profile/profileInfo").then((res) =>
-      setUser((prev) => {
-        return {...prev, email: res.data};
-      })
+      setUser({email: res.data})
     );
   }, []);
-
-  // api needs type checking to make sure its getting the properties from user
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    const name = e.target.name;
-
-    setUser((prev) => {
-      return {...prev, [name]: newValue};
-    });
-  };
-
+  
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -58,7 +41,7 @@ export function Profile() {
         <Avatar
           className="my-3"
           sx={{width: "200px", height: "200px"}}
-          src="https://lh3.googleusercontent.com/a/AEdFTp6lkeA83eNqexHSq1Svr-Y_mHngymXPNQIyIJ3r=s96-c"
+          // src="https://lh3.googleusercontent.com/a/AEdFTp6lkeA83eNqexHSq1Svr-Y_mHngymXPNQIyIJ3r=s96-c"
         />
       </div>
 
@@ -67,9 +50,9 @@ export function Profile() {
           <Form.Group className="w-100 mb-3" controlId="firstNameControl">
             <Form.Label>First Name</Form.Label>
             <Form.Control
-              placeholder={user.first}
-              value={user.first}
-              onChange={handleChange}
+              placeholder={updateInput.userInput.first}
+              value={updateInput.userInput.first}
+              onChange={updateInput.updateInput}
               name="first"
               className="p-4"
             />
@@ -78,9 +61,9 @@ export function Profile() {
           <Form.Group className="w-100 mb-3" controlId="lastNameControl">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
-              placeholder={user.last}
-              value={user.last}
-              onChange={handleChange}
+              placeholder={updateInput.userInput.last}
+              value={updateInput.userInput.last}
+              onChange={updateInput.updateInput}
               name="last"
               className="p-4"
             />
@@ -95,7 +78,7 @@ export function Profile() {
           </div>
         </Form>
 
-        <div className="mt-3" onClick={()=> navigate("/subscription")}>
+        <div className="mt-3" onClick={() => navigate("/subscription")}>
           <h5 className="text-danger">Premium Account</h5>
           <p className="text-secondary">Enjoy your learning without ads anymore</p>
         </div>
@@ -105,7 +88,8 @@ export function Profile() {
           type="contained"
           className="w-100 my-3"
           background={companyInfo.company_color}
-          onClick={() => updateUserInfo(user, controlSelected.selected)}
+          // there has to be a better way
+          onClick={() => updateUserInfo(user.email, updateInput.userInput, controlSelected.selected)}
         />
       </Container>
     </div>

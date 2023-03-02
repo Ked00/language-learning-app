@@ -10,9 +10,9 @@ export function getUserInfo(func: () => void) {
     .catch((err) => console.log());
 }
 
-export function updateUserInfo(user: userInfo, language: string): void {
+export function updateUserInfo(email:string , user: { [key: string]: string; }, language: string): void {
   axios.post("profile/edit", {
-    email: user.email,
+    email: email,
     first_name: user.first,
     last_name: user.last,
       native_language: language,
