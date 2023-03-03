@@ -31,7 +31,7 @@ export function SideMenu() {
           </div>
 
           <ul className="list-unstyled">
-            <SideMenuListItem item="Home" href="dashboard" />
+            <SideMenuListItem item="Home" href="history" />
             <SideMenuListItem item="Play" href="prep" />
             <SideMenuListItem item="Score" />
             <SideMenuListItem item="Contact" href="contact" />

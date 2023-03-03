@@ -6,6 +6,7 @@ type Props = {
   text: string;
   background?: string;
   className?: string;
+  href?: string;
   onClick?: () => void;
   onMouseDown?: () => void;
   onMouseUp?: () => void;
@@ -16,6 +17,7 @@ export function BlockButton(props: Props) {
   return (
     <Button
       className={`p-3 ${props.className}`}
+      href={props.href}
       variant={props.type}
       sx={{background: `${props.background}`}}
       onClick={props.onClick}

@@ -19,7 +19,7 @@ export function FaceBookAuth(): outPut {
       })
       .then((res) => {
         if (res.data) {
-          navigate("/dashboard");
+          navigate("/history");
         } else {
           navigate("/successful");
         }

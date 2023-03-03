@@ -36,7 +36,6 @@ export function GamePrep() {
           navigate("/game");
         }
       })
-
       .catch((err) => console.log(err));
   };
 
@@ -59,7 +58,6 @@ export function GamePrep() {
   return (
     <div className="vh-100 border">
       <MainNavbar />
-
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">Select your game</h1>
         <FormControl className="w-75 d-flex align-items-center">
@@ -69,7 +67,6 @@ export function GamePrep() {
             controlSelected={controlSelected}
             onClick={handlelanguage}
           />
-
           <SelectSubject onClick={handleSubject} />
           <SelectOption
             label="Game type"
@@ -86,7 +83,6 @@ export function GamePrep() {
             getValue={handleSentence}
             item={[{text: "10 sentences"}, {text: "20 sentences"}, {text: "30 sentences"}]}
           />
-
           <BlockButton
             text="Speak"
             type="contained"
