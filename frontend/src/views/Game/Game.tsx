@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Container} from "@mui/material";
-import {useTimer} from "react-timer-hook";
 import axios from "axios";
+import {useSpeechRecognition} from "react-speech-recognition";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
@@ -11,70 +11,46 @@ import {TopicImage} from "../../components/inGame/TopicImage";
 import {Result} from "../../components/inGame/Result";
 
 // logic
-import {
-  startListening,
-  stopListening,
-  finalTranscript,
-} from "../../business-logic/speech-api/speech-to-text";
+import {handleMouseUp, handleMouseDown} from "../../business-logic/speech-api/speech-to-text";
+// import "../../business-logic/Game/Next"
+import {questions} from "../../business-logic/question";
+import {useGameInfo} from "../../business-logic/Game/GameSettings";
 
 // hooks
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useNavigate} from "react-router-dom";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useVisible} from "../../reuseable-hooks/visible";
-import { gameInfo, GameInfoCall } from "../../business-logic/Game/GameInfoCall";
-import { usePoints } from "../../business-logic/Game/points";
-import { useChances } from "../../business-logic/Game/Chances";
+import {usePoints} from "../../business-logic/Game/points";
+import {useChances} from "../../business-logic/Game/Chances";
+import { useTimerHook } from "../../business-logic/timer/timer";
 
 export function Game() {
-  const points = usePoints()
-  const toggle = useVisible(false);
-  const chances = useChances()
+  const points = usePoints();
+  const chances = useChances();
   const navigate = useNavigate();
-  const switchPage = useLoopArray(0, gameInfo.info.sentence);
+  const getInfo = useGameInfo();
+  const {finalTranscript} = useSpeechRecognition();
+  const toggle = useVisible(false);
+  const switchPage = useLoopArray(9, getInfo.info.sentence);
+  const {seconds} = useTimerHook(45)
 
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + gameInfo.info.time);
-  const {minutes, seconds} = useTimer({
-    expiryTimestamp: time,
-    autoStart: true,
-  });
-
-  useEffect(() => {
-   GameInfoCall()
-  }, []);
-
-  const handleMouseDown = () => {
-    startListening();
-  };
-
-  const handleMouseUp = () => {
-    stopListening();
+  const handleUp = () => {
+    handleMouseUp();
     toggle.controlVisibility();
   };
 
-  const next = () => {
-    switchPage.check();
+  useEffect(() => {
+    getInfo.gameInfo();
+  }, []);
 
-    if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
-      switchPage.nextIndex();
-      points.setPoints()
-      setShowResult(false);
-    } else if (chances.chances === 0) {
-      setChances(2);
-      setShowResult(false);
-      switchPage.nextIndex();
-    } else {
-      setChances((prev) => prev - 1);
-      setShowResult(false);
-    }
-  };
-
-  const newPage = async () => {
+  console.log(switchPage.end)
+  
+  const endPage = async () => {
     axios
       .post("quiz/setGameInfo", {
         seconds: seconds,
-        minutes: minutes,
+        // minutes: minutes,
         correct: 21,
         wrong: 9,
         points: points,
@@ -82,17 +58,14 @@ export function Game() {
       .then((res) => (res.status == 200 ? console.log("data sent") : console.log("error")));
   };
 
-  if (switchPage.end && chances.chances == 0) {
-    newPage();
-    navigate("/end");
-  }
-
   return (
     <div className="vh-100">
       <MainNavbar />
 
       <div className="text-md-center">
-        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${gameInfo.info.sentence}`}</h1>
+        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${
+          getInfo.info.sentence
+        }`}</h1>
 
         <Container>
           <LearningLangugaeQuestion text={questions[switchPage.currentIndex].LL} />
@@ -114,18 +87,19 @@ export function Game() {
             text={!toggle ? "Speak" : "Stop Speaking"}
             className="w-100 my-3 text-dark"
             onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
+            onMouseUp={handleUp}
             onTouchStart={handleMouseDown}
-            onTouchEnd={handleMouseUp}
+            onTouchEnd={handleUp}
           />
 
           {toggle.isVisible && (
             <Result
               answer={finalTranscript}
               question={questions[switchPage.currentIndex].LL.toLowerCase()}
-              chances={chances}
+              chances={chances.chances}
               show={toggle.isVisible}
-              onClick={next}
+              end={switchPage.end}
+              // onClick={next}
             />
           )}
         </Container>

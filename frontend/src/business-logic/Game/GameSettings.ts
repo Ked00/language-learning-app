@@ -1,21 +1,33 @@
 import React, {useState} from "react";
+import axios from "axios"
+
 
 type settings = {time: number; sentence: number; subject: string; language: string}
 
 type Output = {
   info: settings;
-  setInfo: (info:settings) => void;
+  gameInfo: () => void;
 };
 
 export function useGameInfo(): Output {
   const [info, setInfo] = useState<settings>({time: 0, sentence: 0, subject: "", language: ""});
 
-  const changeInfo = (info:settings)=>{
-    setInfo(info)
-  }
+  function gameInfoCall(){
+    axios
+         .get("quiz/getGameInfo")
+         .then((res) =>
+          setInfo({
+             time: res.data.GameType,
+             sentence: res.data.Sentences,
+             subject: res.data.Subject,
+             language: res.data.Language,
+           })
+         )
+         .catch((err) => console.log(err));
+   }
 
   return {
     info: info,
-    setInfo: changeInfo,
+    gameInfo: gameInfoCall
   };
 }

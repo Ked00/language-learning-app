@@ -5,29 +5,31 @@ type outPut = {
   nextIndex: () => void;
   prevIndex: () => void;
   end: boolean;
-  check: ()=>void
+  check: () => void;
 };
 
 export function useLoopArray(num: number, max: number): outPut {
   const [currentIndex, setCurrentIndex] = useState(num);
   const [end, setEnd] = useState(false);
 
+  const nextIndex = () => {
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const prevIndex = () => {
+    setCurrentIndex((prev) => prev - 1);
+  };
+
   const checkEnding = () => {
-    if (currentIndex == max - 1) {
-      setEnd(true);
+    if (currentIndex) {
     }
   };
 
   return {
     currentIndex: currentIndex,
+    nextIndex: nextIndex,
+    prevIndex: prevIndex,
     end: end,
     check: checkEnding,
-    // a boolean gets passed to nextIndex from the api call which gets passed to the function its calling to
-    nextIndex: () => {
-      setCurrentIndex((prev) => prev + 1);
-    },
-    prevIndex: () => {
-      setCurrentIndex((prev) => prev - 1);
-    },
   };
 }
