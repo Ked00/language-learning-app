@@ -5,9 +5,9 @@ import {ArrowDropDown, Close} from "@mui/icons-material";
 import {languages} from "../../business-logic/gameInfo";
 
 // hooks
-import {useVisible} from "../../hooks/visible";
-import {useSelected} from "../../hooks/selected";
-import {useUpdateInputValue} from "../../hooks/textFieldInput";
+import {useVisible} from "../../reuseable-hooks/visible";
+import {useSelected} from "../../reuseable-hooks/selected";
+import {useUpdateInputValue} from "../../reuseable-hooks/textFieldInput";
 
 type Props = {
   className?: string;

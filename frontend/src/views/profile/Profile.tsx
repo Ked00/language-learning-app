@@ -13,8 +13,8 @@ import {FormGroup} from "../../components/Inputs/FormGroup";
 // types
 import {companyInfo} from "../../types/companyInfo";
 // hooks
-import {useUpdateInputValue} from "../../hooks/textFieldInput";
-import {useSelected} from "../../hooks/selected";
+import {useUpdateInputValue} from "../../reuseable-hooks/textFieldInput";
+import {useSelected} from "../../reuseable-hooks/selected";
 
 export function Profile() {
   const [user, setUser] = useState({email: ""});

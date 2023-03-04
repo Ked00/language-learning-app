@@ -3,7 +3,7 @@ import {Accordion, AccordionSummary, AccordionDetails} from "@mui/material/";
 import {ExpandMore} from "@mui/icons-material";
 
 // hooks
-import {useSelected} from "../../hooks/selected";
+import {useSelected} from "../../reuseable-hooks/selected";
 
 type Props = {
   label: string;

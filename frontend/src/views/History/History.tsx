@@ -9,7 +9,7 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 import {SelectOption} from "../../components/Inputs/SelectOption";
 
 // types
-import {useSelected} from "../../hooks/selected";
+import {useSelected} from "../../reuseable-hooks/selected";
 
 export function History() {
   const controlSelected = useSelected();

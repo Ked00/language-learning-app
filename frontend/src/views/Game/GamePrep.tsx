@@ -12,7 +12,7 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
 import {companyInfo} from "../../types/companyInfo";
-import {useSelected} from "../../hooks/selected";
+import {useSelected} from "../../reuseable-hooks/selected";
 
 export function GamePrep() {
   const navigate = useNavigate();

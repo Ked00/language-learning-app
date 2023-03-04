@@ -3,8 +3,8 @@ import {Dialog, Button, Container} from "@mui/material";
 import {ArrowDropDown, Close} from "@mui/icons-material";
 
 // hooks
-import {useSelected} from "../../hooks/selected";
-import {useVisible} from "../../hooks/visible";
+import {useSelected} from "../../reuseable-hooks/selected";
+import {useVisible} from "../../reuseable-hooks/visible";
 
 // componenets
 import {SubjectItems} from "../ParagraphElements/SubjectItems";

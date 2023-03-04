@@ -5,7 +5,7 @@ import {Offcanvas} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 // hooks
-import {useVisible} from "../../hooks/visible";
+import {useVisible} from "../../reuseable-hooks/visible";
 import {SideMenuListItem} from "./SideMenuListItem";
 
 export function SideMenu() {

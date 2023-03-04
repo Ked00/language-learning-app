@@ -18,42 +18,30 @@ import {
 } from "../../business-logic/speech-api/speech-to-text";
 
 // hooks
-import {useLoopArray} from "../../hooks/loopArray";
+import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useNavigate} from "react-router-dom";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
-import {useVisible} from "../../hooks/visible";
+import {useVisible} from "../../reuseable-hooks/visible";
+import { gameInfo, GameInfoCall } from "../../business-logic/Game/GameInfoCall";
+import { usePoints } from "../../business-logic/Game/points";
+import { useChances } from "../../business-logic/Game/Chances";
 
 export function Game() {
-  const [info, setInfo] = useState({time: 30, sentence: 10, subject: "", language: ""});
-  const [points, setPoints] = useState(100);
-  const [chances, setChances] = useState(2);
+  const points = usePoints()
   const toggle = useVisible(false);
+  const chances = useChances()
   const navigate = useNavigate();
-  const switchPage = useLoopArray(0, info.sentence);
+  const switchPage = useLoopArray(0, gameInfo.info.sentence);
 
-  
   const time = new Date();
-  time.setSeconds(time.getSeconds() + info.time);
-  const {minutes, seconds, restart, pause} = useTimer({
+  time.setSeconds(time.getSeconds() + gameInfo.info.time);
+  const {minutes, seconds} = useTimer({
     expiryTimestamp: time,
-    onExpire() {
-      console.log("timer over");
-    },
     autoStart: true,
   });
 
   useEffect(() => {
-    axios
-      .get("quiz/getGameInfo")
-      .then((res) =>
-        setInfo({
-          time: res.data.GameType,
-          sentence: res.data.Sentences,
-          subject: res.data.Subject,
-          language: res.data.Language,
-        })
-      )
-      .catch((err) => console.log(err));
+   GameInfoCall()
   }, []);
 
   const handleMouseDown = () => {
@@ -66,14 +54,13 @@ export function Game() {
   };
 
   const next = () => {
-    restart(time);
     switchPage.check();
 
     if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
       switchPage.nextIndex();
-      setPoints((prev) => prev + 10);
+      points.setPoints()
       setShowResult(false);
-    } else if (chances === 0) {
+    } else if (chances.chances === 0) {
       setChances(2);
       setShowResult(false);
       switchPage.nextIndex();
@@ -95,7 +82,7 @@ export function Game() {
       .then((res) => (res.status == 200 ? console.log("data sent") : console.log("error")));
   };
 
-  if (switchPage.end && chances == 0) {
+  if (switchPage.end && chances.chances == 0) {
     newPage();
     navigate("/end");
   }
@@ -105,7 +92,7 @@ export function Game() {
       <MainNavbar />
 
       <div className="text-md-center">
-        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${info.sentence}`}</h1>
+        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${gameInfo.info.sentence}`}</h1>
 
         <Container>
           <LearningLangugaeQuestion text={questions[switchPage.currentIndex].LL} />
@@ -132,7 +119,7 @@ export function Game() {
             onTouchEnd={handleMouseUp}
           />
 
-          {showResult && (
+          {toggle.isVisible && (
             <Result
               answer={finalTranscript}
               question={questions[switchPage.currentIndex].LL.toLowerCase()}
