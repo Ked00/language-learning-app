@@ -10,7 +10,7 @@ type outPut = {
 
 export function useLoopArray(num: number, max: number): outPut {
   const [currentIndex, setCurrentIndex] = useState(num);
-  const [end, setEnd] = useState(false);
+  const [end, setEnd] = useState(true);
 
   const nextIndex = () => {
     setCurrentIndex((prev) => prev + 1);

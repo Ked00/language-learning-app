@@ -9,7 +9,7 @@ export function useChances():Output{
     const [chances, setChances] = useState(2)
 
     function updateChances(){
-        setChances(prev => prev -1)
+        setChances(prev => prev - 1)
     }
 
     return{

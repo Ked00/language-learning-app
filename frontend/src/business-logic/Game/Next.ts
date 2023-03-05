@@ -1,6 +1,5 @@
 // type parameters = {
 //     page: ()=>void
-//     transcript: string
 //     questions: []
 //     showResult: ()=>void
 //     chances:

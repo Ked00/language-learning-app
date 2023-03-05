@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {Container} from "@mui/material";
 import axios from "axios";
-import {useSpeechRecognition} from "react-speech-recognition";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
@@ -24,16 +23,20 @@ import {useVisible} from "../../reuseable-hooks/visible";
 import {usePoints} from "../../business-logic/Game/points";
 import {useChances} from "../../business-logic/Game/Chances";
 import { useTimerHook } from "../../business-logic/timer/timer";
+import { useEndGameStats } from "../../business-logic/Game/EndGameStats";
 
 export function Game() {
-  const points = usePoints();
   const chances = useChances();
-  const navigate = useNavigate();
   const getInfo = useGameInfo();
-  const {finalTranscript} = useSpeechRecognition();
+  const points = usePoints(getInfo.info.sentence);
   const toggle = useVisible(false);
   const switchPage = useLoopArray(9, getInfo.info.sentence);
   const {seconds} = useTimerHook(45)
+  const setStats = useEndGameStats(seconds,getInfo.info.sentence, points.correct, points.points )
+
+  // fix end button 
+  // correct / wrong to api
+  // get minutes
 
   const handleUp = () => {
     handleMouseUp();
@@ -43,20 +46,6 @@ export function Game() {
   useEffect(() => {
     getInfo.gameInfo();
   }, []);
-
-  console.log(switchPage.end)
-  
-  const endPage = async () => {
-    axios
-      .post("quiz/setGameInfo", {
-        seconds: seconds,
-        // minutes: minutes,
-        correct: 21,
-        wrong: 9,
-        points: points,
-      })
-      .then((res) => (res.status == 200 ? console.log("data sent") : console.log("error")));
-  };
 
   return (
     <div className="vh-100">
@@ -94,7 +83,6 @@ export function Game() {
 
           {toggle.isVisible && (
             <Result
-              answer={finalTranscript}
               question={questions[switchPage.currentIndex].LL.toLowerCase()}
               chances={chances.chances}
               show={toggle.isVisible}
