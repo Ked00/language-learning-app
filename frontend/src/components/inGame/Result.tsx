@@ -7,11 +7,10 @@ import {useSpeechRecognition} from "react-speech-recognition";
 
 type Props = {
   question: string;
-  // answer: string;
   chances: number;
   show: boolean;
   end: boolean;
-  onClick?: () => void | void;
+  onClick: () => void;
 };
 
 export function Result(props: Props) {
@@ -29,7 +28,6 @@ export function Result(props: Props) {
               src={require("../../images/check.png")}
               width="40px"
               height="40px"
-              // className="float-end"
             />
           </span>
         </p>

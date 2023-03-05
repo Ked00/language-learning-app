@@ -1,19 +1,25 @@
 import React, {useState} from "react";
 
 type Output = {
-    chances: number
-    setChances: ()=>void
-}
+  chancesLeft: number;
+  decreaseChances: () => void;
+  restartChances: (num: number) => void;
+};
 
-export function useChances():Output{
-    const [chances, setChances] = useState(2)
+export function useChances(): Output {
+  const [chances, setChances] = useState(2);
 
-    function updateChances(){
-        setChances(prev => prev - 1)
-    }
+  function decreaseChances() {
+    setChances((prev) => prev - 1);
+  }
 
-    return{
-        chances: chances,
-        setChances:updateChances
-    }
+  function restartChances(num: number) {
+    setChances(num);
+  }
+
+  return {
+    chancesLeft: chances,
+    decreaseChances: decreaseChances,
+    restartChances: restartChances,
+  };
 }

@@ -2,18 +2,24 @@ import React, {useState} from "react";
 
 type visibilityControls = {
   isVisible: boolean;
-  controlVisibility: () => void;
+  oppisiteOfCurrent: () => void;
+  strict: (show: boolean) => void;
 };
 
-export function useVisible(visible: boolean):visibilityControls {
+export function useVisible(visible: boolean): visibilityControls {
   const [open, SetOpen] = useState(visible);
 
-  const control =()=>{
-    SetOpen(prev => !prev)
-  }
+  const oppisiteOfCurrent = () => {
+    SetOpen((prev) => !prev);
+  };
+
+  const strict = (show: boolean) => {
+    SetOpen(show);
+  };
 
   return {
-    controlVisibility: control,
-    isVisible: open
-  }
+    oppisiteOfCurrent: oppisiteOfCurrent,
+    isVisible: open,
+    strict: strict
+  };
 }

@@ -1,32 +1,38 @@
-// type parameters = {
-//     page: ()=>void
-//     questions: []
-//     showResult: ()=>void
-//     chances:
-//     check: boolean
-// }
+import React from "react";
 
-// export function next(){
-//     switchPage.check();
+type outPut = {
+  currentIndex: number;
+  nextIndex: () => void;
+  prevIndex: () => void;
+  end: boolean;
+  check: () => void;
+};
 
-//     if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
-//       switchPage.nextIndex();
-//       points.setPoints();
-//       setShowResult(false);
-//     } else if (chances.chances === 0) {
-//       setChances(2);a
-//       setShowResult(false);
-//       switchPage.nextIndex();
-//     } else {
-//       setChances((prev) => prev - 1);
-//       setShowResult(false);
-//     }
-// };
+type chances = {
+  chances: number;
+  setChances: () => void;
+};
 
-// export function next(param: parameters){
-//     switch(param.check){
-//         case()
-//     }
-// }
+export function useNext(
+  page: outPut,
+  questions: {LL: string; NL: string; img: string}[],
+  chances: chances,
+  trans: string,
+  points: () => void,
+  result: (show:boolean)=>void
+) {
+  page.check();
 
-export {}
+  if (trans.toLowerCase() === questions[page.currentIndex].LL.toLowerCase()) {
+    page.nextIndex();
+    points();
+    result(false);
+  } else if (chances.chances === 0) {
+    chances.setChances();
+    result(false);
+    page.nextIndex();
+  } else {
+    chances.setChances();
+    result(false);
+  }
+}

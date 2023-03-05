@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Container} from "@mui/material";
-import axios from "axios";
+import {useSpeechRecognition} from "react-speech-recognition";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
@@ -17,35 +17,53 @@ import {useGameInfo} from "../../business-logic/Game/GameSettings";
 
 // hooks
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
-import {useNavigate} from "react-router-dom";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useVisible} from "../../reuseable-hooks/visible";
 import {usePoints} from "../../business-logic/Game/points";
 import {useChances} from "../../business-logic/Game/Chances";
-import { useTimerHook } from "../../business-logic/timer/timer";
-import { useEndGameStats } from "../../business-logic/Game/EndGameStats";
+import {useTimerHook} from "../../business-logic/timer/timer";
+import {useEndGameStats} from "../../business-logic/Game/EndGameStats";
+import {useNext} from "../../business-logic/Game/Next";
 
 export function Game() {
   const chances = useChances();
-  const getInfo = useGameInfo();
-  const points = usePoints(getInfo.info.sentence);
   const toggle = useVisible(false);
-  const switchPage = useLoopArray(9, getInfo.info.sentence);
-  const {seconds} = useTimerHook(45)
-  const setStats = useEndGameStats(seconds,getInfo.info.sentence, points.correct, points.points )
+  const getInfo = useGameInfo();
+  const {seconds} = useTimerHook(getInfo.info.time);
+  const points = usePoints(getInfo.info.sentence);
+  const switchPage = useLoopArray(9, getInfo.info.sentence); //check ending needs to be fixed
+  const setStats = useEndGameStats();
+  const {finalTranscript} = useSpeechRecognition();
+  // const next = useNext(switchPage, questions, chances, finalTranscript, points.setPoints,toggle.oppisiteOfCurrent);
+  // seconds,getInfo.info.sentence, points.correct, points.points
 
-  // fix end button 
-  // correct / wrong to api
+  // fix end button
   // get minutes
 
   const handleUp = () => {
     handleMouseUp();
-    toggle.controlVisibility();
+    toggle.oppisiteOfCurrent();
   };
 
   useEffect(() => {
     getInfo.gameInfo();
   }, []);
+
+  const next = () => {
+    switchPage.check();
+    if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
+      switchPage.nextIndex();
+      toggle.strict(false);
+    } else if (chances.chancesLeft === 0) {
+      chances.restartChances(2);
+      toggle.strict(false);
+      switchPage.nextIndex();
+    } else {
+      chances.decreaseChances();
+      points.setPoints();
+      toggle.strict(false);
+    }
+  };
 
   return (
     <div className="vh-100">
@@ -84,10 +102,10 @@ export function Game() {
           {toggle.isVisible && (
             <Result
               question={questions[switchPage.currentIndex].LL.toLowerCase()}
-              chances={chances.chances}
+              chances={chances.chancesLeft}
               show={toggle.isVisible}
               end={switchPage.end}
-              // onClick={next}
+              onClick={next}
             />
           )}
         </Container>
