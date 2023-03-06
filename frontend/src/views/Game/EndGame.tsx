@@ -1,18 +1,16 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Container, Stack} from "react-bootstrap";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {PriceCard} from "../../components/Cards/PriceCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
-import axios from "axios";
 
-export function EndGame() {
-  useEffect(() => {
-    axios
-      .get("quiz/getEndGameResults")
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-  
+type Props = {
+  getInfo: {info: {time: number; sentence: number}; gameInfo: () => void};
+  points: {correct: number; points: number; decreasePoints: () => void; wrong:number};
+};
+
+
+export function EndGame(props: Props) {
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -34,19 +32,14 @@ export function EndGame() {
 
         <div className="d-flex justify-content-center">
           <PriceCard
-            classname="h-100 d-flex flex-column justify-content-center align-items-center"
-            week="Total Time:"
-            price="5 minutes and 39 seconds"
-          />
-          <PriceCard
             classname="h-100 d-flex justify-content-center align-items-center"
-            week="Score:"
-            price="50 points"
+            week="Score: "
+            price={`${props.points.points} points`}
           />
           <PriceCard
             classname="h-100 d-flex justify-content-center align-items-center mb-5"
-            week="Results:"
-            price="12 correct and 3 wrong"
+            week="Results: "
+            price={`${props.points.correct} correct and ${props.points.wrong} wrong`}
           />
         </div>
 

@@ -10,32 +10,26 @@ import {Result} from "../../components/inGame/Result";
 
 // logic
 import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
-// import "../../business-logic/Game/Next"
-import {useGameInfo} from "../../business-logic/Game/GameSettings";
 import {questions} from "../../business-logic/question";
 
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
-import {useEndGameStats} from "../../business-logic/Game/EndGameStats";
-import {usePoints} from "../../business-logic/Game/points";
 import {useTimerHook} from "../../business-logic/timer/timer";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
 
-export function Game() {
+type Props = {
+  getInfo: {info: {time: number; sentence: number}; gameInfo: () => void};
+  points: {correct: number; points: number; decreasePoints: () => void};
+};
+
+export function Game(props: Props) {
   const chances = useChances();
   const toggle = useVisible(false);
-  const getInfo = useGameInfo();
-  const {seconds} = useTimerHook(getInfo.info.time);
-  const points = usePoints(getInfo.info.sentence);
-  const switchPage = useLoopArray(9, getInfo.info.sentence); //check ending needs to be fixed
-  const setStats = useEndGameStats();
+  const {seconds} = useTimerHook(props.getInfo.info.time);
+  const switchPage = useLoopArray(9, props.getInfo.info.sentence); //check ending needs to be fixed
   const {finalTranscript} = useSpeechRecognition();
-  // const next = useNext(switchPage, questions, chances, finalTranscript, points.setPoints,toggle.oppisiteOfCurrent);
-  // seconds,getInfo.info.sentence, points.correct, points.points
-
-  // fix end button
   // get minutes
 
   const handleUp = () => {
@@ -44,9 +38,9 @@ export function Game() {
   };
 
   useEffect(() => {
-    getInfo.gameInfo();
+    props.getInfo.gameInfo();
   }, []);
-  
+
   const next = () => {
     switchPage.check(chances.chancesLeft);
     if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
@@ -58,7 +52,7 @@ export function Game() {
       switchPage.nextIndex();
     } else {
       chances.decreaseChances();
-      points.decreasePoints();
+      props.points.decreasePoints();
       toggle.strict(false);
     }
   };
@@ -69,7 +63,7 @@ export function Game() {
 
       <div className="text-md-center">
         <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${
-          getInfo.info.sentence
+          props.getInfo.info.sentence
         }`}</h1>
         <Container>
           <LearningLangugaeQuestion text={questions[switchPage.currentIndex].LL} />

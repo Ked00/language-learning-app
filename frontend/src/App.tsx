@@ -8,10 +8,17 @@ import {GamePrep} from "./views/Game/GamePrep";
 import {ContactUs} from "./views/contact/ContactUs";
 import {Profile} from "./views/profile/Profile";
 import {EndGame} from "./views/Game/EndGame";
-import { History } from "./views/History/History";
-import { Game } from "./views/Game/Game";
+import {History} from "./views/History/History";
+import {Game} from "./views/Game/Game";
+
+// hooks
+import {usePoints} from "./business-logic/Game/points";
+import {useGameInfo} from "./business-logic/Game/GameSettings";
 
 export function App() {
+  const getInfo = useGameInfo();
+  const points = usePoints(getInfo.info.sentence);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -25,8 +32,8 @@ export function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/history" element={<History />} />
         {/* in game route */}
-        <Route path="/game" element={<Game />} />
-        <Route path="/end" element={<EndGame />} />
+        <Route path="/game" element={<Game points={points} getInfo={getInfo} />} />
+        <Route path="/end" element={<EndGame points={points} getInfo={getInfo}/>} />
       </Routes>
     </BrowserRouter>
   );

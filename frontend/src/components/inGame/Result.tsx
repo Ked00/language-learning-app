@@ -55,7 +55,7 @@ export function Result(props: Props) {
           type="contained"
           text="End"
           className="w-md-75 w-100 bg-danger"
-          onClick={() => navigate("/end")}
+          onClick={()=> navigate("/end")}
         />
       )}
     </div>
