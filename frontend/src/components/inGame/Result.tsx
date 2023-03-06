@@ -4,7 +4,6 @@ import {BlockButton} from "../Buttons/BlockButton";
 import {useNavigate} from "react-router-dom";
 import {useSpeechRecognition} from "react-speech-recognition";
 
-
 type Props = {
   question: string;
   chances: number;
@@ -16,7 +15,7 @@ type Props = {
 export function Result(props: Props) {
   const navigate = useNavigate();
   const {finalTranscript} = useSpeechRecognition();
-  
+
   return (
     <div className="text-center p-3">
       <h1>Your answer</h1>
@@ -24,11 +23,7 @@ export function Result(props: Props) {
         <p>
           {finalTranscript}
           <span>
-            <img
-              src={require("../../images/check.png")}
-              width="40px"
-              height="40px"
-            />
+            <img src={require("../../images/check.png")} width="40px" height="40px" />
           </span>
         </p>
       ) : (
@@ -60,7 +55,7 @@ export function Result(props: Props) {
           type="contained"
           text="End"
           className="w-md-75 w-100 bg-danger"
-          onClick={props.onClick}
+          onClick={() => navigate("/end")}
         />
       )}
     </div>

@@ -2,24 +2,21 @@ import React from "react";
 import {MoreHoriz, Logout} from "@mui/icons-material";
 import {Avatar} from "@mui/material";
 import {Offcanvas} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 // hooks
 import {useVisible} from "../../reuseable-hooks/visible";
 import {SideMenuListItem} from "./SideMenuListItem";
 
 export function SideMenu() {
-  const visible = useVisible(false);
+  const open = useVisible(false);
   const navigate = useNavigate();
 
   return (
     <>
-      <MoreHoriz onClick={visible.controlVisibility} />
-      <Offcanvas show={visible.isVisible} onHide={visible.controlVisibility}>
-        <Offcanvas.Header
-          closeButton
-          className="d-flex justify-content-end"
-        ></Offcanvas.Header>
+      <MoreHoriz onClick={open.oppisiteOfCurrent} />
+      <Offcanvas show={open.isVisible} onHide={open.strict}>
+        <Offcanvas.Header closeButton className="d-flex justify-content-end"></Offcanvas.Header>
 
         <Offcanvas.Body>
           <div className="d-flex justify-content-center my-5">

@@ -1,29 +1,27 @@
-import React, {useEffect} from "react";
 import {Container} from "@mui/material";
+import {useEffect} from "react";
 import {useSpeechRecognition} from "react-speech-recognition";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {LearningLangugaeQuestion} from "../../components/inGame/LearningLanguageQuestion";
 import {NativeLanguageTranslation} from "../../components/inGame/NativeLanguageTranslation";
-import {TopicImage} from "../../components/inGame/TopicImage";
 import {Result} from "../../components/inGame/Result";
 
 // logic
-import {handleMouseUp, handleMouseDown} from "../../business-logic/speech-api/speech-to-text";
+import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
 // import "../../business-logic/Game/Next"
-import {questions} from "../../business-logic/question";
 import {useGameInfo} from "../../business-logic/Game/GameSettings";
+import {questions} from "../../business-logic/question";
 
 // hooks
-import {useLoopArray} from "../../reuseable-hooks/loopArray";
-import {MainNavbar} from "../../components/Navigation/MainNavbar";
-import {useVisible} from "../../reuseable-hooks/visible";
-import {usePoints} from "../../business-logic/Game/points";
 import {useChances} from "../../business-logic/Game/Chances";
-import {useTimerHook} from "../../business-logic/timer/timer";
 import {useEndGameStats} from "../../business-logic/Game/EndGameStats";
-import {useNext} from "../../business-logic/Game/Next";
+import {usePoints} from "../../business-logic/Game/points";
+import {useTimerHook} from "../../business-logic/timer/timer";
+import {MainNavbar} from "../../components/Navigation/MainNavbar";
+import {useLoopArray} from "../../reuseable-hooks/loopArray";
+import {useVisible} from "../../reuseable-hooks/visible";
 
 export function Game() {
   const chances = useChances();
@@ -48,9 +46,9 @@ export function Game() {
   useEffect(() => {
     getInfo.gameInfo();
   }, []);
-
+  
   const next = () => {
-    switchPage.check();
+    switchPage.check(chances.chancesLeft);
     if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
       switchPage.nextIndex();
       toggle.strict(false);
@@ -60,7 +58,7 @@ export function Game() {
       switchPage.nextIndex();
     } else {
       chances.decreaseChances();
-      points.setPoints();
+      points.decreasePoints();
       toggle.strict(false);
     }
   };
@@ -73,11 +71,9 @@ export function Game() {
         <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${
           getInfo.info.sentence
         }`}</h1>
-
         <Container>
           <LearningLangugaeQuestion text={questions[switchPage.currentIndex].LL} />
           <NativeLanguageTranslation text={questions[switchPage.currentIndex].NL} />
-
           <div className="text-center mt-5">
             <img
               src={questions[switchPage.currentIndex].img}
@@ -86,9 +82,7 @@ export function Game() {
               height="600px"
             />
           </div>
-
           <BlockButton type="outlined" text="Listen" className="w-100 mt-5 text-dark" />
-
           <BlockButton
             type="contained"
             text={!toggle ? "Speak" : "Stop Speaking"}
@@ -104,7 +98,7 @@ export function Game() {
               question={questions[switchPage.currentIndex].LL.toLowerCase()}
               chances={chances.chancesLeft}
               show={toggle.isVisible}
-              end={switchPage.end}
+              end={switchPage.isEnd}
               onClick={next}
             />
           )}

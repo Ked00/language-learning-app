@@ -67,11 +67,6 @@ export function Profile() {
           </div>
         </Form>
 
-        <div className="mt-3" onClick={() => navigate("/subscription")}>
-          <h5 className="text-danger">Premium Account</h5>
-          <p className="text-secondary">Enjoy your learning without ads anymore</p>
-        </div>
-
         <BlockButton
           text="Confirm changes"
           type="contained"

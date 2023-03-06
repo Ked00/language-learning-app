@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 
-type visibilityControls = {
+type Output = {
   isVisible: boolean;
   oppisiteOfCurrent: () => void;
   strict: (show: boolean) => void;
 };
 
-export function useVisible(visible: boolean): visibilityControls {
+export function useVisible(visible: boolean): Output {
   const [open, SetOpen] = useState(visible);
 
   const oppisiteOfCurrent = () => {
@@ -20,6 +20,6 @@ export function useVisible(visible: boolean): visibilityControls {
   return {
     oppisiteOfCurrent: oppisiteOfCurrent,
     isVisible: open,
-    strict: strict
+    strict: strict,
   };
 }

@@ -28,7 +28,7 @@ export function SelectSubject(props: Props) {
       <Button
         variant="outlined"
         className="mb-3 w-75 h-25 border border-dark text-dark rounded"
-        onClick={open.controlVisibility}
+        onClick={open.oppisiteOfCurrent}
       >
         <div className="d-flex justify-content-between align-items-center w-100">
           <p className="mt-3">
@@ -38,7 +38,7 @@ export function SelectSubject(props: Props) {
         </div>
       </Button>
 
-      <Dialog open={open.isVisible} onClose={open.controlVisibility} fullWidth>
+      <Dialog open={open.isVisible} onClose={open.oppisiteOfCurrent} fullWidth>
         <Container>
           <div className="d-flex justify-content-between align-items-center mt-4 mb-3">
             <h2>Subject</h2>

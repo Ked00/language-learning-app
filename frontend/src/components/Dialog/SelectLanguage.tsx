@@ -13,22 +13,22 @@ type Props = {
   className?: string;
   label: string;
   onChanges?: () => void;
-  controlSelected?: {selected: string; setSelected: (value:string) => void};
-  onClick?: (value: string )=>void
+  controlSelected?: {selected: string; setSelected: (value: string) => void};
+  onClick?: (value: string) => void;
 };
 
 export function SelectLanguage(props: Props) {
   const open = useVisible(false);
   const updateInput = useUpdateInputValue();
 
-  // move language logic to business logic folder
+  // make its own component
   const allLanguageOptions = languages.map((data, index) => {
     return (
       <div
         className="p-3 overflow-scroll"
         key={index}
         onClick={() => {
-          props.controlSelected?.setSelected(data.data)
+          props.controlSelected?.setSelected(data.data);
           // props.onClick!(data.data)
         }}
       >
@@ -45,7 +45,7 @@ export function SelectLanguage(props: Props) {
 
   return (
     <>
-      <Button variant="outlined" className={`${props.className}`} onClick={open.controlVisibility}>
+      <Button variant="outlined" className={`${props.className}`} onClick={open.oppisiteOfCurrent}>
         <div className="d-flex justify-content-between align-items-center w-100">
           <p className="mt-3">
             {props.controlSelected?.selected ? props.controlSelected?.selected : props.label}
@@ -54,7 +54,7 @@ export function SelectLanguage(props: Props) {
         </div>
       </Button>
 
-      <Dialog open={open.isVisible} onClose={open.controlVisibility} fullWidth>
+      <Dialog open={open.isVisible} onClose={open.oppisiteOfCurrent} fullWidth>
         <Container>
           <div className="d-flex justify-content-between align-items-center my-4 mb-2">
             <h3>{props.label}</h3>
@@ -63,7 +63,7 @@ export function SelectLanguage(props: Props) {
           <TextField
             className="w-100 mb-3 p-2"
             placeholder="Search for a langugae..."
-            name="language"      
+            name="language"
             onChange={updateInput.updateInput}
             value={updateInput.userInput.language}
           />
