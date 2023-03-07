@@ -1,0 +1,7 @@
+put quiz questions in backend
+setup Listen mulitlanguage
+setup speak 
+give each quiz a unique uuid
+setup sessions
+create questions for each topic
+translate questions

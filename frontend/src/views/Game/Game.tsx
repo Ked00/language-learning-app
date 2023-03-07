@@ -14,7 +14,6 @@ import {questions} from "../../business-logic/question";
 
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
-import {useTimerHook} from "../../business-logic/timer/timer";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
@@ -34,10 +33,8 @@ type Props = {
 export function Game(props: Props) {
   const chances = useChances();
   const toggle = useVisible(false);
-  const {seconds} = useTimerHook(props.getInfo.info.time);
   const switchPage = useLoopArray(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
-  // get minutes
 
   const handleUp = () => {
     handleMouseUp();
@@ -47,10 +44,6 @@ export function Game(props: Props) {
   useEffect(() => {
     props.getInfo.gameInfo();
   }, []);
-
-  console.log(
-    `correct: ${props.points.correct} wrong: ${props.points.wrong} points: ${props.points.points}`
-  );
 
   const next = () => {
     switchPage.check(chances.chancesLeft);

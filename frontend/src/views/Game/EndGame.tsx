@@ -28,14 +28,12 @@ export function EndGame(props: Props) {
         <p className="my-2 p-2 fs-4 text-md-center">Here is your result</p>
         <div className="d-flex justify-content-center">
           <PriceCard
-            classname="h-100 d-flex justify-content-center align-items-center"
-            week="Score: "
-            price={`${props.points.points} points`}
+            label="Score: "
+            content={`${props.points.points} points`}
           />
           <PriceCard
-            classname="h-100 d-flex justify-content-center align-items-center mb-5"
-            week="Results: "
-            price={`${props.points.correct} out of ${props.getInfo.info.sentence} correct`}
+            label="Results: "
+            content={`${props.points.correct} / ${props.getInfo.info.sentence} `}
           />
         </div>
         <Stack gap={3} className="mt-3 ms-md-4">

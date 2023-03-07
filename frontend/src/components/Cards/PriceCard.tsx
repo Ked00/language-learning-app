@@ -5,24 +5,21 @@ import {Col} from "react-bootstrap";
 import {companyInfo} from "../../types/companyInfo";
 
 type Props = {
-  week?: string;
-  price?: string;
-  classname?: string
-  variantWeek?: string
-  variantPrice?:string
+  label: string;
+  content: string;
 };
 
 export function PriceCard(props: Props) {
   return (
     <Col className="p-2">
-      <Card className="mx-md-3 mx-2 w-100 h-100">
-        <CardContent className="text-center">
-          <Typography  component="div" className="">
-            {props.week}
+      <Card className="w-100 d-flex justify-content-center align-items-center text-center">
+        <CardContent>
+          <Typography >
+            {props.label}
           </Typography>
 
-          <Typography  variant="h5" sx={{color: companyInfo.company_color}}  className={`${props.classname}`}>
-            {props.price}
+          <Typography  variant="h5" sx={{color: companyInfo.company_color}}>
+            {props.content}
           </Typography>
         </CardContent>
       </Card>
