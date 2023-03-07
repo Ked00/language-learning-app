@@ -10,7 +10,6 @@ import {Result} from "../../components/inGame/Result";
 
 // logic
 import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
-import {questions} from "../../business-logic/question";
 
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";

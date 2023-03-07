@@ -6,7 +6,6 @@ import {languages} from "../../business-logic/gameInfo";
 
 // hooks
 import {useVisible} from "../../reuseable-hooks/visible";
-import {useSelected} from "../../reuseable-hooks/selected";
 import {useUpdateInputValue} from "../../reuseable-hooks/textFieldInput";
 
 type Props = {
@@ -20,7 +19,6 @@ type Props = {
 export function SelectLanguage(props: Props) {
   const open = useVisible(false);
   const updateInput = useUpdateInputValue();
-
   // make its own component
   const allLanguageOptions = languages.map((data, index) => {
     return (

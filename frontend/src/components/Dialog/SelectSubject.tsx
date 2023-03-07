@@ -44,10 +44,10 @@ export function SelectSubject(props: Props) {
             <h2>Subject</h2>
             <Close />
           </div>
-          <SubjectItems select={selectSubject} text={"Humans"} />
-          <SubjectItems select={selectSubject} text={"Animals"} />
-          <SubjectItems select={selectSubject} text={"Nature"} />
-          <SubjectItems select={selectSubject} text={"Summer"} />
+          <SubjectItems select={selectSubject} text={"Greetings"} />
+          <SubjectItems select={selectSubject} text={"Food"} />
+          <SubjectItems select={selectSubject} text={"Directions"} />
+          <SubjectItems select={selectSubject} text={"Conversation"} />
         </Container>
       </Dialog>
     </>
