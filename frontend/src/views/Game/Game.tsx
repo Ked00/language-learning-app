@@ -21,14 +21,21 @@ import {useVisible} from "../../reuseable-hooks/visible";
 
 type Props = {
   getInfo: {info: {time: number; sentence: number}; gameInfo: () => void};
-  points: {correct: number; points: number; decreasePoints: () => void};
+  points: {
+    correct: number;
+    wrong: number;
+    points: number;
+    decrease: () => void;
+    increase: () => void;
+    wrongFunc: () => void;
+  };
 };
 
 export function Game(props: Props) {
   const chances = useChances();
   const toggle = useVisible(false);
   const {seconds} = useTimerHook(props.getInfo.info.time);
-  const switchPage = useLoopArray(9, props.getInfo.info.sentence); //check ending needs to be fixed
+  const switchPage = useLoopArray(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
   // get minutes
 
@@ -41,18 +48,24 @@ export function Game(props: Props) {
     props.getInfo.gameInfo();
   }, []);
 
+  console.log(
+    `correct: ${props.points.correct} wrong: ${props.points.wrong} points: ${props.points.points}`
+  );
+
   const next = () => {
     switchPage.check(chances.chancesLeft);
     if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
       switchPage.nextIndex();
       toggle.strict(false);
+      props.points.increase();
     } else if (chances.chancesLeft === 0) {
       chances.restartChances(2);
       toggle.strict(false);
       switchPage.nextIndex();
     } else {
       chances.decreaseChances();
-      props.points.decreasePoints();
+      props.points.decrease();
+      props.points.wrongFunc();
       toggle.strict(false);
     }
   };

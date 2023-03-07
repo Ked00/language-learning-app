@@ -17,8 +17,7 @@ import {useGameInfo} from "./business-logic/Game/GameSettings";
 
 export function App() {
   const getInfo = useGameInfo();
-  const points = usePoints(getInfo.info.sentence);
-
+  const points = usePoints();
   return (
     <BrowserRouter>
       <Routes>
@@ -33,7 +32,7 @@ export function App() {
         <Route path="/history" element={<History />} />
         {/* in game route */}
         <Route path="/game" element={<Game points={points} getInfo={getInfo} />} />
-        <Route path="/end" element={<EndGame points={points} getInfo={getInfo}/>} />
+        <Route path="/end" element={<EndGame points={points} getInfo={getInfo} />} />
       </Routes>
     </BrowserRouter>
   );

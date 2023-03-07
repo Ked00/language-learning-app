@@ -21,7 +21,7 @@ export function useLoopArray(current: number, maxIndexes: number): outPut {
   };
 
   const checkEnding = (chances: number) => {
-    if (currentIndex + 1 == maxIndexes && chances > 0) {
+    if ((currentIndex + 1) == maxIndexes && chances >= 0) {
       setIsEnd(true)
     }
   };
