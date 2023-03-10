@@ -15,15 +15,13 @@ type Props = {
 
 export function SelectOption(props: Props) {
   const controlSelected = useSelected();
+  // const detailsF
 
   const AccordionItems = props.item.map((item, index) => {
     return (
       <AccordionDetails
         key={index}
-        onClick={() => {
-          controlSelected.setSelected(item.text)
-          props.getValue!(item.text)
-        }}
+        // onClick={}
         onMouseDown={props.onClick}
         onTouchStart={props.onClick}
         // onMouseUp={()=>props.onClick}

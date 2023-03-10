@@ -1,7 +1,7 @@
 import React, {useState, ChangeEvent} from "react";
 
 type outPut = {
-  userInput: {[key:string]: string};
+  userInput: {[key: string]: string};
   updateInput: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -16,8 +16,8 @@ export function useUpdateInputValue(): outPut {
       return {...prev, [name]: newValue};
     });
 
-    const updateSelected = (value:string) => {
-      setUserInput(prev =>{
+    const updateSelected = (value: string) => {
+      setUserInput((prev) => {
         return {...prev, selected: newValue};
       });
     };

@@ -42,6 +42,7 @@ app.use(
 app.use("/auth", require("./routes/authentication/auth"));
 app.use("/profile", require("./routes/profile/profile"));
 app.use("/quiz", require("./routes/quiz/quiz"));
+app.use("/history", require("./routes/history/history"))
 
 mongoose.connect(
   "mongodb+srv://allorganizedspace:h4dZj0lVS1ALVP0U@cluster0.9lvmotd.mongodb.net/?retryWrites=true&w=majority",

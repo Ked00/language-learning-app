@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {FormControl, Container} from "@mui/material";
 import {Row, Col} from "react-bootstrap";
+import axios from "axios"
+import {useGetHistory} from "../../business-logic/api-calls/getCorrect"
 
 // components
 import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
@@ -12,29 +14,27 @@ import {SelectOption} from "../../components/Inputs/SelectOption";
 import {useSelected} from "../../reuseable-hooks/selected";
 
 export function History() {
-  const controlSelected = useSelected();
+  const getData = useGetHistory()
+  // const selected = 
   return (
     <div className="vh-100">
       <MainNavbar />
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">History</h1>
         <FormControl className="w-75 d-flex align-items-center">
-          <SelectLanguage
-            label="Learning langugae"
-            className="mb-3 w-75 h-25 border border-dark text-dark rounded "
-            controlSelected={controlSelected}
+        <SelectOption
+            label="Select language"
+            id="game-type"
+            item={[{text: "Spanish"}, {text: "English"}]}
           />
           <SelectOption
-            label="Sentences filter"
+            label="Select filter"
             id="game-type"
             item={[{text: "All sentences"}, {text: "Correct"}, {text: "Wrong"}]}
           />
-          <SelectOption
-            label="Sentences"
-            id="sentences"
-            item={[{text: "Today"}, {text: "This Week"}, {text: "This Month"}, {text: "This Year"}]}
-          />
+          <BlockButton text="View" type="contained" className="w-75 mb-5" />
         </FormControl>
+        
         {/* make its own component */}
           <div className="w-100 h-100">
             <Container>
