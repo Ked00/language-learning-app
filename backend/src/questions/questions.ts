@@ -1,5 +1,5 @@
 export const questionList = {
-  English: [
+  english: [
     {question: "he walked his dog in the cold morning before he went to work", correct: false, topic: "humans"},
     {question: "How do i get to the market from here", correct: false, topic: "humans"},
     {question: "Welcome to my home", correct: false, topic: "humans"},

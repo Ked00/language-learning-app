@@ -18,6 +18,7 @@ import {useGameInfo} from "./business-logic/Game/GameSettings";
 export function App() {
   const getInfo = useGameInfo();
   const points = usePoints();
+
   return (
     <BrowserRouter>
       <Routes>

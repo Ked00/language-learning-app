@@ -18,7 +18,7 @@ import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
 
 type Props = {
-  getInfo: {info: {time: number; sentence: number}; gameInfo: () => void};
+  getInfo: {info: {time: number; sentence: number; questions:{main:[{question: string}], translated:[{question: string}] }}; gameInfo: () => void};
   points: {
     correct: number;
     wrong: number;
@@ -46,7 +46,7 @@ export function Game(props: Props) {
 
   const next = () => {
     switchPage.check(chances.chancesLeft);
-    if (finalTranscript.toLowerCase() === questions[switchPage.currentIndex].LL.toLowerCase()) {
+    if (finalTranscript.toLowerCase() === props.getInfo.info.questions.main[switchPage.currentIndex].question) {
       switchPage.nextIndex();
       toggle.strict(false);
       props.points.increase();
@@ -71,15 +71,15 @@ export function Game(props: Props) {
           props.getInfo.info.sentence
         }`}</h1>
         <Container>
-          <LearningLangugaeQuestion text={questions[switchPage.currentIndex].LL} />
-          <NativeLanguageTranslation text={questions[switchPage.currentIndex].NL} />
+          <LearningLangugaeQuestion text={props.getInfo.info.questions.main[switchPage.currentIndex].question} />
+          <NativeLanguageTranslation text={props.getInfo.info.questions.translated[switchPage.currentIndex].question} />
           <div className="text-center mt-5">
-            <img
+            {/* <img
               src={questions[switchPage.currentIndex].img}
               className="img-fluid"
               width="600px"
               height="600px"
-            />
+            /> */}
           </div>
           <BlockButton type="outlined" text="Listen" className="w-100 mt-5 text-dark" />
           <BlockButton
@@ -94,7 +94,7 @@ export function Game(props: Props) {
 
           {toggle.isVisible && (
             <Result
-              question={questions[switchPage.currentIndex].LL.toLowerCase()}
+              question={props.getInfo.info.questions.main[switchPage.currentIndex].question}
               chances={chances.chancesLeft}
               show={toggle.isVisible}
               end={switchPage.isEnd}

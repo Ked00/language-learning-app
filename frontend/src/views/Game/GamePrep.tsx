@@ -6,18 +6,13 @@ import axios from "axios";
 // components
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {SelectOption} from "../../components/Inputs/SelectOption";
-import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
-import {SelectSubject} from "../../components/Dialog/SelectSubject";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
 import {companyInfo} from "../../types/companyInfo";
-import {useSelected} from "../../reuseable-hooks/selected";
 
 export function GamePrep() {
   const navigate = useNavigate();
-  const controlSelected = useSelected();
-
   const [language, setlanguage] = useState("");
   const [type, setType] = useState("");
   const [subject, setSubject] = useState("");
@@ -61,13 +56,18 @@ export function GamePrep() {
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">Select your game</h1>
         <FormControl className="w-75 d-flex align-items-center">
-          <SelectLanguage
-            label="Select langugae"
-            className="mb-3 w-75 h-25 border border-dark text-dark rounded "
-            controlSelected={controlSelected}
-            onClick={handlelanguage}
+          <SelectOption
+            label="Select language"
+            id="language"
+            getValue={handlelanguage}
+            item={[{text: "Spanish"}, {text: "English"}]}
           />
-          <SelectSubject onClick={handleSubject} />
+          <SelectOption
+            label="Subject"
+            id="Subject"
+            getValue={handleSubject}
+            item={[{text: "Greetings"}]}
+          />
           <SelectOption
             label="Game type"
             id="game-type"
@@ -81,7 +81,7 @@ export function GamePrep() {
             label="Sentences"
             id="sentences"
             getValue={handleSentence}
-            item={[{text: "10 sentences"}, {text: "20 sentences"}, {text: "30 sentences"}]}
+            item={[{text: "10 sentences"}, {text: "20 sentences"}]}
           />
           <BlockButton
             text="Speak"

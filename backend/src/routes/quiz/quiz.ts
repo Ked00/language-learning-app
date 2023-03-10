@@ -1,7 +1,7 @@
 import express, {NextFunction, Request, Response} from "express";
 import {questionList} from "../../questions/questions";
 
-const router = express.Router()
+const router = express.Router();
 
 router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) => {
   const {language, subject, gameType, sentences} = req.body;
@@ -24,7 +24,17 @@ router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) =>
   res.sendStatus(200);
 });
 
-router.post("/getGameInfo", (req: Request, res: Response) => {
+router.get("/getGameInfo", (req: Request, res: Response) => {
+  const language = req.session.gameInfo?.Language.toLowerCase();
+  const translated = language === "spanish" ? "english" : "spanish";
+
+  res.send({
+    details: req.session.gameInfo,
+    questions: {
+      main: questionList[language as keyof typeof questionList],
+      translated: questionList[translated as keyof typeof questionList],
+    },
+  });
 });
 
 module.exports = router;

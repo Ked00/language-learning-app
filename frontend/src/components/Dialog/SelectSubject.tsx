@@ -45,9 +45,9 @@ export function SelectSubject(props: Props) {
             <Close />
           </div>
           <SubjectItems select={selectSubject} text={"Greetings"} />
-          <SubjectItems select={selectSubject} text={"Food"} />
+          {/* <SubjectItems select={selectSubject} text={"Food"} />
           <SubjectItems select={selectSubject} text={"Directions"} />
-          <SubjectItems select={selectSubject} text={"Conversation"} />
+          <SubjectItems select={selectSubject} text={"Conversation"} /> */}
         </Container>
       </Dialog>
     </>
