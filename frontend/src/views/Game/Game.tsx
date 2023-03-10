@@ -84,7 +84,7 @@ export function Game(props: Props) {
           <BlockButton type="outlined" text="Listen" className="w-100 mt-5 text-dark" />
           <BlockButton
             type="contained"
-            text={!toggle ? "Speak" : "Stop Speaking"}
+            text={!toggle.isVisible ? "Speak" : "Stop Speaking"}
             className="w-100 my-3 text-dark"
             onMouseDown={handleMouseDown}
             onMouseUp={handleUp}

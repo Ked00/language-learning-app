@@ -1,10 +1,6 @@
-create questions for each topic
 put quiz questions in backend
 give each quiz a unique uuid
 setup sessions
 setup speak mulitlanguage
 setup Listen 
-translate questions 
-
-
-group questions by categories and use enums to provide a number
+quiz images 
