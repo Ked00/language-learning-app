@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, ChangeEvent} from "react";
 import {FormControl, Container} from "@mui/material";
 import {Row, Col} from "react-bootstrap";
-import axios from "axios"
-import {useGetHistory} from "../../business-logic/api-calls/getCorrect"
+import axios from "axios";
+import {useGetHistory} from "../../business-logic/api-calls/getCorrect";
 
 // components
 import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
@@ -12,38 +12,55 @@ import {SelectOption} from "../../components/Inputs/SelectOption";
 
 // types
 import {useSelected} from "../../reuseable-hooks/selected";
+import {handleMouseDown} from "../../business-logic/speech-api/speech-to-text";
 
 export function History() {
-  const getData = useGetHistory()
-  // const selected = 
+  const [language, setLanguage] = useState("");
+  const [filter, setFilter] = useState("");
+  const getData = useGetHistory();
+
+  const handleLanguage = (value: string) => {
+    setLanguage(value);
+  };
+
+  const handleFilter = (value: string) => {
+    setFilter(value);
+  };
+
   return (
     <div className="vh-100">
       <MainNavbar />
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">History</h1>
         <FormControl className="w-75 d-flex align-items-center">
-        <SelectOption
+          <SelectOption
             label="Select language"
-            id="game-type"
+            id="language"
             item={[{text: "Spanish"}, {text: "English"}]}
+            getValue={handleLanguage}
           />
           <SelectOption
             label="Select filter"
-            id="game-type"
+            id="filter"
             item={[{text: "All sentences"}, {text: "Correct"}, {text: "Wrong"}]}
+            getValue={handleFilter}
           />
-          <BlockButton text="View" type="contained" className="w-75 mb-5" />
+          <BlockButton
+            text="View"
+            type="contained"
+            className="w-75 mb-5"
+            onClick={() => getData.api_call(language, filter)}
+          />
         </FormControl>
-        
         {/* make its own component */}
-          <div className="w-100 h-100">
-            <Container>
-              <div className="d-flex justify-content-between w-100">
-                <h3>Sentences</h3>
-                <h3 className="me-5">Your answer</h3>
-              </div>
-            </Container>
-          </div>
+        <div className="w-100 h-100">
+          <Container>
+            <div className="d-flex justify-content-between w-100">
+              <h3>Sentences</h3>
+              <h3 className="me-5">Your answer</h3>
+            </div>
+          </Container>
+        </div>
       </div>
     </div>
   );

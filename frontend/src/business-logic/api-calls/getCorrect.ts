@@ -1,26 +1,17 @@
 import React, {useState} from "react";
 import axios from "axios";
 
-type parameters = {
-  language: "english" | "spanish";
-  filter: "all sentences" | true | false;
-};
-
 type outPut = {
-  api_call: () => void;
+  api_call: (language: string, filter: string) => void;
 };
 
 export function useGetHistory(): outPut {
-  // const [info, setInfo] = useState<parameters>({
-  //   language: parameters!.language,
-  //   filter: parameters!.filter,
-  // });
 
-  function getData() {
+  function getData(language: string, filter: string) {
     axios
       .post("", {
-        language: "spanish",
-        filter: "false",
+        language: language.toLowerCase(),
+        filter: filter == "Correct" ? true: false,
       })
       .then((res) => {
         return res.data;

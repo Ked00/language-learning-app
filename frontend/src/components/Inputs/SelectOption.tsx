@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React, {ChangeEvent} from "react";
 import {Accordion, AccordionSummary, AccordionDetails} from "@mui/material/";
 import {ExpandMore} from "@mui/icons-material";
-
 // hooks
 import {useSelected} from "../../reuseable-hooks/selected";
 
@@ -15,13 +14,15 @@ type Props = {
 
 export function SelectOption(props: Props) {
   const controlSelected = useSelected();
-  // const detailsF
 
   const AccordionItems = props.item.map((item, index) => {
     return (
       <AccordionDetails
         key={index}
-        // onClick={}
+        onClick={() => {
+          controlSelected.setSelected(item.text)
+          props.getValue!(item.text)
+        }}
         onMouseDown={props.onClick}
         onTouchStart={props.onClick}
         // onMouseUp={()=>props.onClick}

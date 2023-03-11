@@ -11,13 +11,9 @@ router.post("/", (req: Request, res: Response) => {
   for (let i = 0; i < questions.length; i++) {
     if ((questions[i].correct = filter)) {
       list.push(questions[i]);
-    } else {
-      res.send({message: "Server error try again"});
     }
   }
-
-  // res.send(list);
-  console.log(list);
+  res.send(list);
 });
 
 module.exports = router;
