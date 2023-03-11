@@ -1,4 +1,4 @@
-import React, {useState, ChangeEvent} from "react";
+import React, {useState, useEffect} from "react";
 import {FormControl, Container} from "@mui/material";
 import {Row, Col} from "react-bootstrap";
 import axios from "axios";
@@ -26,6 +26,34 @@ export function History() {
   const handleFilter = (value: string) => {
     setFilter(value);
   };
+
+  useEffect(() => {
+  }, [getData.response]);
+
+  const mapQuizResults = getData.response.map((item) => {
+    return (
+      <div>
+        <Row className="h-25 w-100 mt-4 border rounded p-1">
+          <Col>
+            <div className="d-flex">
+              <img src={require("../../images/logo.png")} width="40px" height="40px" />
+              <p className="p-2">{item.question}</p>
+            </div>
+
+            <div className="d-flex">
+              <img src={require("../../images/logo.png")} width="40px" height="40px" />
+              <p className="">{item.question}</p>
+            </div>
+          </Col>
+
+          <Col className="text-end">{item.question}</Col>
+        </Row>
+        <Row className="text-center mt-3">
+          <BlockButton type="contained" text="Try again" />
+        </Row>
+      </div>
+    );
+  });
 
   return (
     <div className="vh-100">
@@ -60,6 +88,7 @@ export function History() {
               <h3 className="me-5">Your answer</h3>
             </div>
           </Container>
+          {getData.response.length >= 2 ? mapQuizResults : ""}
         </div>
       </div>
     </div>
