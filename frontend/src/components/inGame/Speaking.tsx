@@ -12,7 +12,7 @@ import {
 
 export function Speaking() {
   const {browserSupportsSpeechRecognition} = useSpeechRecognition();
-  const [toggle, setToggle] = useState("Start speaking")
+  const [toggle, setToggle] = useState("ASS GRENADE")
 
   return (
     <div className="vh-100 bg-secondary">
@@ -25,9 +25,9 @@ export function Speaking() {
             type="contained"
             text={toggle}
             className="w-75 mt-5 bg-white text-dark"
-            onMouseDown={startListening}
+            // onMouseDown={startListening}
             onMouseUp={stopListening}
-            onTouchStart={startListening}
+            // onTouchStart={startListening}
             onTouchEnd={stopListening}
           />
         </Container>

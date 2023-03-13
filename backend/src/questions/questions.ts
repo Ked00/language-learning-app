@@ -12,7 +12,7 @@ export const questionList = {
   ],
 
   spanish: [
-    {question: "paseó a su perro en la mañana fría antes de ir a trabajar", correct: false, topic: "humans"},
+    {question: "mi casa su casa", correct:false, topic: "humans"},
     {question: "Cómo llego al mercado desde aquí", correct: false, topic: "humans"},
     {question: "Bienvenida a mi casa", correct: false, topic: "humans"},
     {question: "cuanto tiempo llevas trabajando aqui", correct: false, topic: "humans"},

@@ -17,6 +17,7 @@ router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) =>
 
   req.session.gameInfo = {
     Language: language,
+    languageOption: language == "spanish" ? "es-MX" : "en-US",
     Subject: subject,
     GameType: gameType === "Cool: You have 45 sec to answer each sentence" ? 45 : 30,
     Sentences: sentence,

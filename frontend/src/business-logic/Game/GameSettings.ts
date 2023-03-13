@@ -6,6 +6,7 @@ type settings = {
   sentence: number;
   subject: string;
   language: string;
+  option: string;
   questions: {main: [{question: string}]; translated: [{question: string}]};
 };
 
@@ -20,6 +21,7 @@ export function useGameInfo(): Output {
     sentence: 0,
     subject: "",
     language: "",
+    option: "",
     questions: {main: [{question: ""}], translated: [{question: ""}]},
   });
 
@@ -32,6 +34,7 @@ export function useGameInfo(): Output {
           sentence: res.data.details.Sentences,
           subject: res.data.details.Subject,
           language: res.data.details.Language,
+          option: res.data.details.languageOption,
           questions: res.data.questions,
         })
       )

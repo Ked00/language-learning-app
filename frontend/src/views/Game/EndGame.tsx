@@ -4,13 +4,10 @@ import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {PriceCard} from "../../components/Cards/PriceCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
-type Props = {
-  getInfo: {info: {time: number; sentence: number}; gameInfo: () => void};
-  points: {correct: number; points: number; decrease: () => void; wrong:number};
-};
+import { gameProps } from "../../types/gameProps";
 
 
-export function EndGame(props: Props) {
+export function EndGame(props: gameProps) {
   return (
     <div className="vh-100">
       <MainNavbar />

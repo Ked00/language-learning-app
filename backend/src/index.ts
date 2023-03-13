@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import session from "express-session";
+import RedisStore from "connect-redis";
+import {createClient} from "redis";
 const app = express();
 
 declare module "express-session" {
@@ -15,6 +17,7 @@ declare module "express-session" {
       Subject: string;
       GameType: number;
       Sentences: number;
+      languageOption: string;
     };
     results: {
       seconds: number;
@@ -26,6 +29,16 @@ declare module "express-session" {
   }
 }
 
+let redisClient = createClient({
+  url: "redis://default:P3EINnDxNqGxmxZ5y2S92S8rAUsj4LC9@redis-13926.c15.us-east-1-4.ec2.cloud.redislabs.com:13926",
+});
+redisClient.connect().catch(console.error);
+
+let redisStore = new RedisStore({
+  client: redisClient,
+  prefix: "language-app",
+});
+
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -35,6 +48,7 @@ app.use(
     secret: "the_guy_from_upwork",
     resave: false,
     saveUninitialized: false,
+    store: redisStore,
   })
 );
 

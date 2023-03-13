@@ -1,5 +1,5 @@
 import {Container} from "@mui/material";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useSpeechRecognition} from "react-speech-recognition";
 import useSpeech from "use-speech18";
 
@@ -18,26 +18,9 @@ import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
 
-type Props = {
-  getInfo: {
-    info: {
-      time: number;
-      sentence: number;
-      questions: {main: [{question: string}]; translated: [{question: string}]};
-    };
-    gameInfo: () => void;
-  };
-  points: {
-    correct: number;
-    wrong: number;
-    points: number;
-    decrease: () => void;
-    increase: () => void;
-    wrongFunc: () => void;
-  };
-};
+import { gameProps } from "../../types/gameProps";
 
-export function Game(props: Props) {
+export function Game(props: gameProps) {
   const chances = useChances();
   const toggle = useVisible(false);
   const switchPage = useLoopArray(0, props.getInfo.info.sentence);
@@ -76,7 +59,6 @@ export function Game(props: Props) {
       toggle.strict(false);
     }
   };
-
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -113,9 +95,9 @@ export function Game(props: Props) {
             type="contained"
             text={!toggle.isVisible ? "Speak" : "Stop Speaking"}
             className="w-100 my-3 text-dark"
-            onMouseDown={handleMouseDown}
+            onMouseDown={() => handleMouseDown(props.getInfo.info.option)}
             onMouseUp={handleUp}
-            onTouchStart={handleMouseDown}
+            onTouchStart={() => handleMouseDown(props.getInfo.info.option)}
             onTouchEnd={handleUp}
           />
 
