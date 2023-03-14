@@ -11,27 +11,12 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 // logic
 import {companyInfo} from "../../types/companyInfo";
 import {useObject} from "../../reuseable-hooks/stateObject";
+import {useRedirectToGame} from "../../business-logic/Game/RedirectToGame";
 
 export function GamePrep() {
   const navigate = useNavigate();
   const object = useObject();
-
-
-  const move = () => {
-    axios
-      .post("quiz/setGameInfo", {
-        language: language,
-        subject: subject,
-        gameType: type,
-        sentences: sentence,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          navigate("/game");
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  const redirect = useRedirectToGame();
 
   return (
     <div className="vh-100 border">
@@ -71,7 +56,7 @@ export function GamePrep() {
             type="contained"
             background={companyInfo.company_color}
             className="w-75 mt-3"
-            // onClick={move}
+            onClick={() => redirect.redirect(object.object)}
           />
         </FormControl>
       </div>

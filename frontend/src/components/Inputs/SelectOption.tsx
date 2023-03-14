@@ -27,7 +27,6 @@ export function SelectOption(props: Props) {
         onClick={() => click(item.text, props.id)}
         onMouseDown={props.onClick}
         onTouchStart={props.onClick}
-        // onMouseUp={()=>props.onClick}
       >
         {item.text}
       </AccordionDetails>
