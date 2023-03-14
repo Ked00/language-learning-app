@@ -1,19 +1,8 @@
 import React from "react";
 import {Button} from "@mui/material";
+import { standardButton } from "../../types/Buttontypes";
 
-type Props = {
-  type: "text" | "outlined" | "contained";
-  text: string;
-  background?: string;
-  className?: string;
-  href?: string;
-  onClick?: () => void;
-  onMouseDown?: () => void;
-  onMouseUp?: () => void;
-  onTouchStart?: () => void;
-  onTouchEnd?: () => void;
-};
-export function BlockButton(props: Props) {
+export function BlockButton(props: standardButton) {
   return (
     <Button
       className={`p-3 ${props.className}`}
@@ -21,10 +10,6 @@ export function BlockButton(props: Props) {
       variant={props.type}
       sx={{background: `${props.background}`}}
       onClick={props.onClick}
-      onMouseDown={props.onMouseDown}
-      onMouseUp={props.onMouseUp}
-      onTouchStart={props.onTouchStart}
-      onTouchEnd={props.onTouchEnd}
     >
       {props.text}
     </Button>

@@ -1,37 +1,34 @@
-import React, {useState} from "react";
-import {VolumeUp} from "@mui/icons-material";
-import {Container} from "@mui/material";
-import {useSpeechRecognition} from "react-speech-recognition";
-// components
-import {BlockButton} from "../Buttons/BlockButton";
-// logic
-import {
-  startListening,
-  stopListening,
-} from "../../business-logic/speech-api/speech-to-text";
+import React from "react";
+import {Button} from "@mui/material";
 
-export function Speaking() {
-  const {browserSupportsSpeechRecognition} = useSpeechRecognition();
-  const [toggle, setToggle] = useState("ASS GRENADE")
+import {companyInfo} from "../../types/companyInfo";
+import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
+
+type Props = {
+  isVisible: boolean;
+  toggle: () => void;
+  language: string;
+};
+
+export function Speaking(props: Props) {
+  const handleUp = () => {
+    handleMouseUp();
+    props.toggle();
+  };
 
   return (
-    <div className="vh-100 bg-secondary">
-      {!browserSupportsSpeechRecognition ? (
-        <h1 className="text-center p-5">Browser not Supported</h1>
-      ) : (
-        <Container className="vh-100 d-flex align-items-center justify-content-center flex-column">
-          <VolumeUp sx={{width: "300px", height: "300px", color: "white"}} />
-          <BlockButton
-            type="contained"
-            text={toggle}
-            className="w-75 mt-5 bg-white text-dark"
-            // onMouseDown={startListening}
-            onMouseUp={stopListening}
-            // onTouchStart={startListening}
-            onTouchEnd={stopListening}
-          />
-        </Container>
-      )}
-    </div>
+    <>
+        <Button
+          variant="contained"
+          className="w-100 my-3 p-3 text-dark"
+          sx={{background: companyInfo.company_color}}
+          onMouseDown={() => handleMouseDown(props.language)}
+          onTouchStart={() => handleMouseDown(props.language)}
+          onMouseUp={handleUp}
+          onTouchEnd={handleUp}
+        >
+          {!props.isVisible ? "Start Speaking" : "Stop Speaking"}
+        </Button>
+    </>
   );
 }

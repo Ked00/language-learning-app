@@ -9,16 +9,14 @@ import {LearningLangugaeQuestion} from "../../components/inGame/LearningLanguage
 import {NativeLanguageTranslation} from "../../components/inGame/NativeLanguageTranslation";
 import {Result} from "../../components/inGame/Result";
 
-// logic
-import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
-
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
 
-import { gameProps } from "../../types/gameProps";
+import {gameProps} from "../../types/gameProps";
+import {Speaking} from "../../components/inGame/Speaking";
 
 export function Game(props: gameProps) {
   const chances = useChances();
@@ -27,10 +25,8 @@ export function Game(props: gameProps) {
   const {finalTranscript} = useSpeechRecognition();
   const {Speak, speak_utils} = useSpeech();
 
-  const handleUp = () => {
-    handleMouseUp();
-    toggle.oppisiteOfCurrent();
-  };
+  const question = props.getInfo.info.questions.main[switchPage.currentIndex].question;
+  const translated = props.getInfo.info.questions.translated[switchPage.currentIndex].question;
 
   useEffect(() => {
     props.getInfo.gameInfo();
@@ -41,10 +37,7 @@ export function Game(props: gameProps) {
 
   const next = () => {
     switchPage.check(chances.chancesLeft);
-    if (
-      finalTranscript.toLowerCase() ===
-      props.getInfo.info.questions.main[switchPage.currentIndex].question
-    ) {
+    if (finalTranscript.toLowerCase() === question) {
       switchPage.nextIndex();
       toggle.strict(false);
       props.points.increase();
@@ -68,42 +61,32 @@ export function Game(props: gameProps) {
           props.getInfo.info.sentence
         }`}</h1>
         <Container>
-          <LearningLangugaeQuestion
-            text={props.getInfo.info.questions.main[switchPage.currentIndex].question}
-          />
-          <NativeLanguageTranslation
-            text={props.getInfo.info.questions.translated[switchPage.currentIndex].question}
-          />
+          <LearningLangugaeQuestion text={question} />
+          <NativeLanguageTranslation text={translated} />
           <div className="text-center mt-5">
             {/* <img
-              src={questions[switchPage.currentIndex].img}
+              src={require("../../images/car.png")}
               className="img-fluid"
               width="600px"
               height="600px"
             /> */}
           </div>
-          <BlockButton
-            type="outlined"
-            text="Listen"
-            className="w-100 mt-5 text-dark"
-            onClick={() => {
-              Speak(props.getInfo.info.questions.main[switchPage.currentIndex].question);
-            }}
-          />
 
-          <BlockButton
-            type="contained"
-            text={!toggle.isVisible ? "Speak" : "Stop Speaking"}
-            className="w-100 my-3 text-dark"
-            onMouseDown={() => handleMouseDown(props.getInfo.info.option)}
-            onMouseUp={handleUp}
-            onTouchStart={() => handleMouseDown(props.getInfo.info.option)}
-            onTouchEnd={handleUp}
-          />
+            <BlockButton
+              type="outlined"
+              text="Listen"
+              className="w-100 mt-5 text-dark"
+              onClick={() => Speak(question)}
+            />
+            <Speaking
+              isVisible={toggle.isVisible}
+              toggle={toggle.oppisiteOfCurrent}
+              language={props.getInfo.info.option}
+            />
 
           {toggle.isVisible && (
             <Result
-              question={props.getInfo.info.questions.main[switchPage.currentIndex].question}
+              question={question}
               chances={chances.chancesLeft}
               show={toggle.isVisible}
               end={switchPage.isEnd}

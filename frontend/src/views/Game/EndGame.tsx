@@ -4,8 +4,7 @@ import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {PriceCard} from "../../components/Cards/PriceCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
-import { gameProps } from "../../types/gameProps";
-
+import {gameProps} from "../../types/gameProps";
 
 export function EndGame(props: gameProps) {
   return (
@@ -24,10 +23,7 @@ export function EndGame(props: gameProps) {
         </div>
         <p className="my-2 p-2 fs-4 text-md-center">Here is your result</p>
         <div className="d-flex justify-content-center">
-          <PriceCard
-            label="Score: "
-            content={`${props.points.points} points`}
-          />
+          <PriceCard label="Score: " content={`${props.points.points} points`} />
           <PriceCard
             label="Results: "
             content={`${props.points.correct} / ${props.getInfo.info.sentence} `}

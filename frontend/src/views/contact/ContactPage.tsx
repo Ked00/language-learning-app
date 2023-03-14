@@ -4,7 +4,7 @@ import React from "react";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {Logo} from "../../components/Logo/Logo";
 
-export function ContactUs() {
+export function ContactPage() {
   return (
     <div className="vh-100">
       <MainNavbar />

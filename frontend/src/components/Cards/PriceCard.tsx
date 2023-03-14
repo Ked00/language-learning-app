@@ -14,11 +14,8 @@ export function PriceCard(props: Props) {
     <Col className="p-2">
       <Card className="w-100 d-flex justify-content-center align-items-center text-center">
         <CardContent>
-          <Typography >
-            {props.label}
-          </Typography>
-
-          <Typography  variant="h5" sx={{color: companyInfo.company_color}}>
+          <Typography>{props.label}</Typography>
+          <Typography variant="h5" sx={{color: companyInfo.company_color}}>
             {props.content}
           </Typography>
         </CardContent>
