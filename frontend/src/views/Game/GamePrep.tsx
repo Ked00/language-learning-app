@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, ChangeEvent} from "react";
 import {FormControl} from "@mui/material/";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -10,13 +10,12 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
 import {companyInfo} from "../../types/companyInfo";
+import {useObject} from "../../reuseable-hooks/stateObject";
 
 export function GamePrep() {
   const navigate = useNavigate();
-  const [language, setlanguage] = useState("");
-  const [type, setType] = useState("");
-  const [subject, setSubject] = useState("");
-  const [sentence, setSentence] = useState("");
+  const object = useObject();
+
 
   const move = () => {
     axios
@@ -34,22 +33,6 @@ export function GamePrep() {
       .catch((err) => console.log(err));
   };
 
-  const handlelanguage = (value: string) => {
-    setlanguage(value);
-  };
-
-  const handleSubject = (value: string) => {
-    setSubject(value);
-  };
-
-  const handleType = (value: string) => {
-    setType(value);
-  };
-
-  const handleSentence = (value: string) => {
-    setSentence(value);
-  };
-
   return (
     <div className="vh-100 border">
       <MainNavbar />
@@ -59,19 +42,19 @@ export function GamePrep() {
           <SelectOption
             label="Select language"
             id="language"
-            getValue={handlelanguage}
+            getValue={object.addKeyvalue}
             item={[{text: "Spanish"}, {text: "English"}]}
           />
           <SelectOption
             label="Subject"
             id="Subject"
-            getValue={handleSubject}
+            getValue={object.addKeyvalue}
             item={[{text: "Greetings"}]}
           />
           <SelectOption
             label="Game type"
             id="game-type"
-            getValue={handleType}
+            getValue={object.addKeyvalue}
             item={[
               {text: "Stress: You have 30 sec to answer each sentence"},
               {text: "Cool: You have 45 sec to answer each sentence"},
@@ -80,7 +63,7 @@ export function GamePrep() {
           <SelectOption
             label="Sentences"
             id="sentences"
-            getValue={handleSentence}
+            getValue={object.addKeyvalue}
             item={[{text: "10 sentences"}, {text: "20 sentences"}]}
           />
           <BlockButton
@@ -88,7 +71,7 @@ export function GamePrep() {
             type="contained"
             background={companyInfo.company_color}
             className="w-75 mt-3"
-            onClick={move}
+            // onClick={move}
           />
         </FormControl>
       </div>

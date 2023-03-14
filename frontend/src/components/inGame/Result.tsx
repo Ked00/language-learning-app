@@ -1,8 +1,10 @@
 import React from "react";
-import {Clear} from "@mui/icons-material";
 import {BlockButton} from "../Buttons/BlockButton";
 import {useNavigate} from "react-router-dom";
 import {useSpeechRecognition} from "react-speech-recognition";
+
+import { Correct } from "./Correct";
+import { Incorrect } from "./Incorrect";
 
 type Props = {
   question: string;
@@ -10,32 +12,20 @@ type Props = {
   show: boolean;
   end: boolean;
   onClick: () => void;
+  transcript: string;
 };
 
 export function Result(props: Props) {
   const navigate = useNavigate();
-  const {finalTranscript} = useSpeechRecognition();
 
   return (
     <div className="text-center p-3">
       <h1>Your answer</h1>
-      {finalTranscript.toLowerCase() === props.question ? (
-        <p>
-          {finalTranscript}
-          <span>
-            <img src={require("../../images/check.png")} width="40px" height="40px" />
-          </span>
-        </p>
-      ) : (
-        <p className="text-danger">
-          {finalTranscript}
-          <span>
-            <Clear color="error" fontSize="large" />
-          </span>
-        </p>
-      )}
+      {props.transcript.toLowerCase() === props.question ? 
+        <Correct transcript={props.transcript} /> : <Incorrect transcript={props.transcript}/>
+      }
 
-      {finalTranscript.toLowerCase() === props.question ? (
+      {props.transcript.toLowerCase() === props.question ? (
         <p>You got 10 points</p>
       ) : (
         <p>{`You have ${props.chances} more tries`}</p>
@@ -55,7 +45,7 @@ export function Result(props: Props) {
           type="contained"
           text="End"
           className="w-md-75 w-100 bg-danger"
-          onClick={()=> navigate("/end")}
+          onClick={() => navigate("/end")}
         />
       )}
     </div>

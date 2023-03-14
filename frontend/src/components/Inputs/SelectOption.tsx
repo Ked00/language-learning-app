@@ -8,21 +8,23 @@ type Props = {
   label: string;
   id: string;
   item: {text: string}[];
-  onClick?: ()=>void
-  getValue?: (value: string)=> void
+  onClick?: () => void;
+  getValue?: (value: string, id: string) => void;
 };
 
 export function SelectOption(props: Props) {
   const controlSelected = useSelected();
 
+  function click(text: string, id: string) {
+    controlSelected.setSelected(text);
+    props.getValue!(text, id)
+  }
+
   const AccordionItems = props.item.map((item, index) => {
     return (
       <AccordionDetails
         key={index}
-        onClick={() => {
-          controlSelected.setSelected(item.text)
-          props.getValue!(item.text)
-        }}
+        onClick={() => click(item.text, props.id)}
         onMouseDown={props.onClick}
         onTouchStart={props.onClick}
         // onMouseUp={()=>props.onClick}
@@ -31,7 +33,7 @@ export function SelectOption(props: Props) {
       </AccordionDetails>
     );
   });
- 
+
   return (
     <>
       <Accordion className="w-75 border border-dark p-2 mb-3 rounded">

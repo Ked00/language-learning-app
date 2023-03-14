@@ -23,8 +23,7 @@ export function Game(props: gameProps) {
   const toggle = useVisible(false);
   const switchPage = useLoopArray(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
-  const {Speak, speak_utils} = useSpeech();
-
+  const {Speak, speak_utils} = useSpeech()
   const question = props.getInfo.info.questions.main[switchPage.currentIndex].question;
   const translated = props.getInfo.info.questions.translated[switchPage.currentIndex].question;
 
@@ -87,6 +86,7 @@ export function Game(props: gameProps) {
           {toggle.isVisible && (
             <Result
               question={question}
+              transcript={finalTranscript}
               chances={chances.chancesLeft}
               show={toggle.isVisible}
               end={switchPage.isEnd}
