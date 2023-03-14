@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Container} from "@mui/material";
 // components
 import {OnboardingNav} from "../../components/Navigation/OnboardingNav";

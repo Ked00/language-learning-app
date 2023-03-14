@@ -9,10 +9,6 @@ import {companyInfo} from "../../types/companyInfo";
 
 export function SuccessfulRegistration() {
   const navigate = useNavigate();
-  const move = () => {
-    navigate("/dashboard");
-  };
-
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -31,7 +27,7 @@ export function SuccessfulRegistration() {
             text="Continue"
             background={companyInfo.company_color}
             className="w-100"
-            onClick={move}
+            onClick={() => navigate("/dashboard")}
           />
         </Container>
       </div>

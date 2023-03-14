@@ -1,7 +1,6 @@
-import React, {useState, ChangeEvent} from "react";
+import React from "react";
 import {FormControl} from "@mui/material/";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 
 // components
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
