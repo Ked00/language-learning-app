@@ -22,7 +22,7 @@ export function MainNavbar() {
           <SideMenu />
           <Avatar
             className="ms-3"
-            src={require("../../images/userPic.jpeg")}
+            src="localhost://images/userPic.jpeg"
             onClick={() => navigate("/profile")}
           />
         </div>

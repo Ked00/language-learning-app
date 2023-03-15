@@ -27,8 +27,7 @@ export function History() {
     setFilter(value);
   };
 
-  useEffect(() => {
-  }, [getData.response]);
+  useEffect(() => {}, [getData.response]);
 
   const mapQuizResults = getData.response.map((item) => {
     return (
@@ -36,12 +35,12 @@ export function History() {
         <Row className="h-25 w-100 mt-4 border rounded p-1">
           <Col>
             <div className="d-flex">
-              <img src={require("../../images/logo.png")} width="40px" height="40px" />
+              <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" />
               <p className="p-2">{item.question}</p>
             </div>
 
             <div className="d-flex">
-              <img src={require("../../images/logo.png")} width="40px" height="40px" />
+              <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" />
               <p className="">{item.question}</p>
             </div>
           </Col>

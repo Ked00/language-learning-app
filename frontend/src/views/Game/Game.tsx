@@ -23,7 +23,7 @@ export function Game(props: gameProps) {
   const toggle = useVisible(false);
   const switchPage = useLoopArray(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
-  const {Speak, speak_utils} = useSpeech()
+  const {Speak, speak_utils} = useSpeech();
   const question = props.getInfo.info.questions.main[switchPage.currentIndex].question;
   const translated = props.getInfo.info.questions.translated[switchPage.currentIndex].question;
 
@@ -63,25 +63,25 @@ export function Game(props: gameProps) {
           <LearningLangugaeQuestion text={question} />
           <NativeLanguageTranslation text={translated} />
           <div className="text-center mt-5">
-            {/* <img
-              src={require("../../images/car.png")}
+            <img
+              src="http://localhost:3000/images/logo.png"
               className="img-fluid"
               width="600px"
               height="600px"
-            /> */}
+            />
           </div>
 
-            <BlockButton
-              type="outlined"
-              text="Listen"
-              className="w-100 mt-5 text-dark"
-              onClick={() => Speak(question)}
-            />
-            <Speaking
-              isVisible={toggle.isVisible}
-              toggle={toggle.oppisiteOfCurrent}
-              language={props.getInfo.info.option}
-            />
+          <BlockButton
+            type="outlined"
+            text="Listen"
+            className="w-100 mt-5 text-dark"
+            onClick={() => Speak(question)}
+          />
+          <Speaking
+            isVisible={toggle.isVisible}
+            toggle={toggle.oppisiteOfCurrent}
+            language={props.getInfo.info.option}
+          />
 
           {toggle.isVisible && (
             <Result

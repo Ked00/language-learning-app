@@ -15,7 +15,7 @@ export function EndGame(props: gameProps) {
           <h1>Congratulation!</h1>
           <p className="mb-4">You have finished the game</p>
           <img
-            src={require("../../images/celebration.png")}
+            src="http://localhost:3000/images/celebration.png"
             width="100%"
             height="100%"
             className="image-fluid"

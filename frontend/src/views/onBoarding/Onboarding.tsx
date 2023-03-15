@@ -18,7 +18,7 @@ export function Onboarding() {
       <OnboardingNav />
       <div className="h-50 my-5 text-center">
         <img
-          src={require("../../images/onBoarding.jpg")}
+          src="http://localhost:3000/images/onBoarding.jpg" 
           width="85%"
           height="100%"
         />

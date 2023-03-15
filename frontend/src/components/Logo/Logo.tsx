@@ -8,7 +8,7 @@ type Props = {
 export function Logo(props: Props) {
   return (
     <img
-      src={require("../../images/logo.png")}
+      src="http://localhost:3000/images/logo.png"
       width={props.width}
       height={props.height}
     />

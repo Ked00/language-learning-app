@@ -13,7 +13,7 @@ export function SuccessfulRegistration() {
     <div className="vh-100">
       <MainNavbar />
       <div className="h-50 mt-5 mb-3 d-flex justify-content-center align-items-center">
-        <img src={require("../../images/succesfulRegistration.png")} />
+        <img src="http://localhost:3000/images/succesfulRegistration.png"  />
       </div>
 
       <div className="d-grid gap-3 p-4 text-center">

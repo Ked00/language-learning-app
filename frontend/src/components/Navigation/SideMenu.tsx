@@ -22,7 +22,7 @@ export function SideMenu() {
           <div className="d-flex justify-content-center my-5">
             <Avatar
               sx={{width: "100px", height: "100px"}}
-              src={require("../../images/userPic.jpeg")}
+              src="http://localhost:3000/images/userPic.png"
               onClick={() => navigate("/profile")}
             />
           </div>
