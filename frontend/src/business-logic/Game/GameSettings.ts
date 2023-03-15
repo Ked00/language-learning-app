@@ -7,7 +7,7 @@ type settings = {
   subject: string;
   language: string;
   option: string;
-  questions: {main: [{question: string}]; translated: [{question: string}]};
+  questions: {main: [{question: string, image:string}]; translated: [{question: string}]};
 };
 
 type Output = {
@@ -22,7 +22,7 @@ export function useGameInfo(): Output {
     subject: "",
     language: "",
     option: "",
-    questions: {main: [{question: ""}], translated: [{question: ""}]},
+    questions: {main: [{question: "", image: ""}], translated: [{question: ""}]},
   });
 
   function gameInfoCall() {

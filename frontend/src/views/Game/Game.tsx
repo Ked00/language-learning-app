@@ -26,6 +26,7 @@ export function Game(props: gameProps) {
   const {Speak, speak_utils} = useSpeech();
   const question = props.getInfo.info.questions.main[switchPage.currentIndex].question;
   const translated = props.getInfo.info.questions.translated[switchPage.currentIndex].question;
+  const image = props.getInfo.info.questions.main[switchPage.currentIndex].image;
 
   useEffect(() => {
     props.getInfo.gameInfo();
@@ -64,7 +65,7 @@ export function Game(props: gameProps) {
           <NativeLanguageTranslation text={translated} />
           <div className="text-center mt-5">
             <img
-              src="http://localhost:3000/images/logo.png"
+              src={`http://localhost:3000/images/${image}`}
               className="img-fluid"
               width="600px"
               height="600px"
