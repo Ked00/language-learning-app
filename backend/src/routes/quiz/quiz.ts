@@ -28,14 +28,28 @@ router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) =>
 router.get("/getGameInfo", (req: Request, res: Response) => {
   const language = req.session.gameInfo?.Language.toLowerCase();
   const translated = language === "spanish" ? "english" : "spanish";
+  const main = questionList[language as keyof typeof questionList];
+
+  req.session.main = main;
 
   res.send({
     details: req.session.gameInfo,
     questions: {
-      main: questionList[language as keyof typeof questionList],
+      main: main,
       translated: questionList[translated as keyof typeof questionList],
     },
   });
+});
+
+router.post("/updateTest", (req: Request, res: Response) => {
+  const correct: boolean = req.body.correct;
+  const index: number = req.body.index;
+
+  if(correct){
+    req.session.main![index].correct = correct
+  }
+
+ console.log(req.session.main)
 });
 
 module.exports = router;
