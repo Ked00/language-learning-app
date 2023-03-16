@@ -48,8 +48,7 @@ router.post("/updateTest", (req: Request, res: Response) => {
   if(correct){
     req.session.main![index].correct = correct
   }
-
- console.log(req.session.main)
+  req.sessionStore.set(req.session.userInfo!.sid, req.session.main)
 });
 
 module.exports = router;

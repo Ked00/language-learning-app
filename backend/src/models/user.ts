@@ -7,6 +7,7 @@ interface user {
   email: string;
   premium_user?: boolean;
   photo: string;
+  sid: string;
 }
 
 export const userModel = new Schema<user>({
@@ -26,8 +27,11 @@ export const userModel = new Schema<user>({
     type: String,
     required: true,
   },
-  premium_user: String,
   native_language: String,
+  sid:{
+    type: String,
+    required:true
+  },
 });
 
 export default mongoose.model<user>("user", userModel);

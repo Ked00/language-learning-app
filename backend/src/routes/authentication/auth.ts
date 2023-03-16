@@ -8,18 +8,20 @@ router.post("/login", async (req: Request, res: Response) => {
   const matching = await userModel.findOne({email: user});
 
   if (matching) {
-    req.session.userInfo = {email: user, isLoggedIn: true};
+    req.session.userInfo = {email: user, isLoggedIn: true, sid: matching.sid};
+    req.sessionStore.get(matching.sid, (err) => {
+      console.log(err);
+    });
     res.send(true);
   } else {
     const newUser = new userModel({
       email: user,
-      //   first_name: req.body.first_name,
-      //   last_name: req.body.last_name,
       photo: req.body.photo,
+      sid: req.sessionID,
     });
 
     await newUser.save();
-    req.session.userInfo = {email: user, isLoggedIn: true};
+    req.session.userInfo = {email: user, isLoggedIn: true, sid: req.sessionID};
     res.send(false);
   }
 });

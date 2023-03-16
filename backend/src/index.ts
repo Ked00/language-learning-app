@@ -5,12 +5,14 @@ import session from "express-session";
 import RedisStore from "connect-redis";
 import {createClient} from "redis";
 const app = express();
+const date = new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000);
 
 declare module "express-session" {
   interface SessionData {
     userInfo: {
       isLoggedIn: boolean;
       email: string;
+      sid: string;
     };
     gameInfo: {
       Language: string;
