@@ -1,5 +1,4 @@
 import express, {NextFunction, Request, Response} from "express";
-import {SessionData} from "express-session";
 import {questionList} from "../../questions/questions";
 
 const router = express.Router();
@@ -25,9 +24,11 @@ router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) =>
 });
 
 router.get("/getGameInfo", (req: Request, res: Response) => {
-  const language = req.session.gameInfo?.Language.toLowerCase();
+  const language = req.session.gameInfo!.Language.toLowerCase();
   const translated = language === "spanish" ? "english" : "spanish";
   const main = questionList[language as keyof typeof questionList];
+
+  req.session.main = main
 
   res.send({
     details: req.session.gameInfo,

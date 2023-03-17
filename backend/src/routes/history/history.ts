@@ -14,7 +14,7 @@ router.post("/", (req: Request, res: Response) => {
     }
   }
 
-  console.log(req.session);
+  console.log(req.session.main![0].correct);
   res.send(list);
 });
 

@@ -17,6 +17,8 @@ export function GamePrep() {
   const object = useObject();
   const redirect = useRedirectToGame();
 
+  console.log(object.object)
+
   return (
     <div className="vh-100 border">
       <MainNavbar />
@@ -31,7 +33,7 @@ export function GamePrep() {
           />
           <SelectOption
             label="Subject"
-            id="Subject"
+            id="subject"
             getValue={object.addKeyvalue}
             item={[{text: "Greetings"}]}
           />

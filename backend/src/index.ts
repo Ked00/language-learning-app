@@ -26,7 +26,7 @@ declare module "express-session" {
       correct: number;
       wrong: number;
     };
-    main: {question: string; correct: boolean; image: string}[];
+    main: {question: string; correct: boolean| undefined; image: string}[];
   }
 }
 
