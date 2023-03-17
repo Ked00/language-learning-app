@@ -29,10 +29,6 @@ router.get("/getGameInfo", (req: Request, res: Response) => {
   const translated = language === "spanish" ? "english" : "spanish";
   const main = questionList[language as keyof typeof questionList];
 
-  if(req.session.main![0].question !== main[0].question){
-    req.session.main = main
-  }
-  
   res.send({
     details: req.session.gameInfo,
     questions: {
