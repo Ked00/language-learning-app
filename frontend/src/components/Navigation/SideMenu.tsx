@@ -3,6 +3,7 @@ import {MoreHoriz, Logout} from "@mui/icons-material";
 import {Avatar} from "@mui/material";
 import {Offcanvas} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import axios from "axios"
 
 // hooks
 import {useVisible} from "../../reuseable-hooks/visible";
@@ -22,7 +23,7 @@ export function SideMenu() {
           <div className="d-flex justify-content-center my-5">
             <Avatar
               sx={{width: "100px", height: "100px"}}
-              src="http://localhost:3000/images/userPic.png"
+              src="http://localhost:3000/images/userPic.jpeg"
               onClick={() => navigate("/profile")}
             />
           </div>
@@ -34,7 +35,7 @@ export function SideMenu() {
             <SideMenuListItem item="Contact" href="contact" />
           </ul>
         </Offcanvas.Body>
-        <p className="ms-5 fs-5">
+        <p className="ms-5 fs-5" onClick={()=> axios.get("auth/logout")}>
           <span>
             <Logout />
           </span>

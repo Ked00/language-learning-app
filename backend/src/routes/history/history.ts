@@ -13,6 +13,8 @@ router.post("/", (req: Request, res: Response) => {
       list.push(questions[i])
     }
   }
+
+  console.log(req.session);
   res.send(list);
 });
 

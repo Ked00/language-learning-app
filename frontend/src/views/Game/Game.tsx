@@ -17,7 +17,7 @@ import {useVisible} from "../../reuseable-hooks/visible";
 
 import {gameProps} from "../../types/gameProps";
 import {Speaking} from "../../components/inGame/Speaking";
-import { updateTest } from "../../business-logic/api-calls/updateTest";
+import {updateTest} from "../../business-logic/api-calls/updateTest";
 
 export function Game(props: gameProps) {
   const chances = useChances();
@@ -42,7 +42,7 @@ export function Game(props: gameProps) {
       switchPage.nextIndex();
       toggle.strict(false);
       props.points.increase();
-      updateTest(true, switchPage.currentIndex)
+      updateTest(true, switchPage.currentIndex);
     } else if (chances.chancesLeft === 0) {
       chances.restartChances(2);
       toggle.strict(false);
@@ -54,14 +54,13 @@ export function Game(props: gameProps) {
       toggle.strict(false);
     }
   };
+
   return (
     <div className="vh-100">
       <MainNavbar />
 
       <div className="text-md-center">
-        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${
-          props.getInfo.info.sentence
-        }`}</h1>
+        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${props.getInfo.info.sentence}`}</h1>
         <Container>
           <LearningLangugaeQuestion text={question} />
           <NativeLanguageTranslation text={translated} />

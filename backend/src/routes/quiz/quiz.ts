@@ -1,4 +1,5 @@
 import express, {NextFunction, Request, Response} from "express";
+import {SessionData} from "express-session";
 import {questionList} from "../../questions/questions";
 
 const router = express.Router();
@@ -9,10 +10,8 @@ router.post("/setGameInfo", (req: Request, res: Response, next: NextFunction) =>
 
   if (sentences === "10 sentences") {
     sentence = 10;
-  } else if (sentences === "20 sentences") {
-    sentence = 20;
   } else {
-    sentence = 30;
+    sentence = 20;
   }
 
   req.session.gameInfo = {
@@ -30,8 +29,10 @@ router.get("/getGameInfo", (req: Request, res: Response) => {
   const translated = language === "spanish" ? "english" : "spanish";
   const main = questionList[language as keyof typeof questionList];
 
-  req.session.main = main;
-
+  if(req.session.main![0].question !== main[0].question){
+    req.session.main = main
+  }
+  
   res.send({
     details: req.session.gameInfo,
     questions: {
@@ -45,10 +46,9 @@ router.post("/updateTest", (req: Request, res: Response) => {
   const correct: boolean = req.body.correct;
   const index: number = req.body.index;
 
-  if(correct){
-    req.session.main![index].correct = correct
+  if (correct) {
+    req.session.main![index].correct = correct;
   }
-  req.sessionStore.set(req.session.userInfo!.sid, req.session.main)
 });
 
 module.exports = router;

@@ -5,14 +5,12 @@ import session from "express-session";
 import RedisStore from "connect-redis";
 import {createClient} from "redis";
 const app = express();
-const date = new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000);
 
 declare module "express-session" {
   interface SessionData {
     userInfo: {
       isLoggedIn: boolean;
       email: string;
-      sid: string;
     };
     gameInfo: {
       Language: string;
@@ -33,7 +31,11 @@ declare module "express-session" {
 }
 
 let redisClient = createClient({
-  url: "redis://default:P3EINnDxNqGxmxZ5y2S92S8rAUsj4LC9@redis-13926.c15.us-east-1-4.ec2.cloud.redislabs.com:13926",
+  password: 'KGxWLvohQj2VXXnhc4n0GHrgYNwsc9FX',
+  socket: {
+      host: 'redis-12170.c283.us-east-1-4.ec2.cloud.redislabs.com',
+      port: 12170,
+  }
 });
 redisClient.connect().catch(console.error);
 
@@ -50,7 +52,7 @@ app.use(
   session({
     secret: "the_guy_from_upwork",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: redisStore,
   })
 );

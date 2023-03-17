@@ -1,6 +1,5 @@
 import React from "react";
 import {AppBar, Avatar} from "@mui/material/";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 // TYPES
 import {companyInfo} from "../../types/companyInfo";
@@ -22,12 +21,12 @@ export function MainNavbar() {
           <SideMenu />
           <Avatar
             className="ms-3"
-            src="localhost://images/userPic.jpeg"
+            src="http://localhost:3000/images/userPic.jpeg"
             onClick={() => navigate("/profile")}
           />
         </div>
 
-        <Logo width="50px" height="50px" />
+        <Logo width="50px" height="50px"/>
       </div>
     </AppBar>
   );

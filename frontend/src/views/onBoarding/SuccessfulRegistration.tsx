@@ -27,7 +27,7 @@ export function SuccessfulRegistration() {
             text="Continue"
             background={companyInfo.company_color}
             className="w-100"
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/history")}
           />
         </Container>
       </div>
