@@ -31,26 +31,23 @@ export function History() {
 
   const mapQuizResults = getData.response.map((item) => {
     return (
-      <div>
-        <Row className="h-25 w-100 mt-4 border rounded p-1">
-          <Col>
-            <div className="d-flex">
-              <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" />
-              <p className="p-2">{item.question}</p>
-            </div>
+      <Container className="mb-4">
+          <Row className="h-25 w-100 mt-4 border rounded p-1 d-flex align-items-center">
+            <Col>
+              <div className="d-flex">
+                {/* <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" /> */}
+                <h3 className="p-2">5/10</h3>
+              </div>
+            </Col>
 
-            <div className="d-flex">
-              <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" />
-              <p className="">{item.question}</p>
-            </div>
-          </Col>
-
-          <Col className="text-end">{item.question}</Col>
-        </Row>
-        <Row className="text-center mt-3">
-          <BlockButton type="contained" text="Try again" />
-        </Row>
-      </div>
+            <Col className="text-end">
+              <h3>100</h3>
+            </Col>
+          </Row>
+          <Row className="text-center my-3 w-100">
+            <BlockButton type="contained" text="Try again" />
+          </Row>
+      </Container>
     );
   });
 
@@ -83,8 +80,8 @@ export function History() {
         <div className="w-100 h-100">
           <Container>
             <div className="d-flex justify-content-between w-100">
-              <h3>Sentences</h3>
-              <h3 className="me-5">Your answer</h3>
+              <h3>Ratio</h3>
+              <h3 className="me-5">Points</h3>
             </div>
           </Container>
           {getData.response.length >= 2 ? mapQuizResults : ""}

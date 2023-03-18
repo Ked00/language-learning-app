@@ -38,15 +38,16 @@ export function Game(props: gameProps) {
 
   const next = () => {
     switchPage.check(chances.chancesLeft);
-    if (finalTranscript.toLowerCase() === question) {
+    if (finalTranscript.toLowerCase() === question.toLowerCase()) {
       switchPage.nextIndex();
       toggle.strict(false);
       props.points.increase();
+      chances.restartChances(2);
       updateTest(true, switchPage.currentIndex);
     } else if (chances.chancesLeft === 0) {
       chances.restartChances(2);
       toggle.strict(false);
-      switchPage.nextIndex();
+      switchPage.nextIndex();  
     } else {
       chances.decreaseChances();
       props.points.decrease();
@@ -54,6 +55,8 @@ export function Game(props: gameProps) {
       toggle.strict(false);
     }
   };
+
+  console.log(props.getInfo.info.questions.main)
 
   return (
     <div className="vh-100">

@@ -21,11 +21,11 @@ export function Result(props: Props) {
   return (
     <div className="text-center p-3">
       <h1>Your answer</h1>
-      {props.transcript.toLowerCase() === props.question ? 
+      {props.transcript.toLowerCase() === props.question.toLowerCase() ? 
         <Correct transcript={props.transcript} /> : <Incorrect transcript={props.transcript}/>
       }
 
-      {props.transcript.toLowerCase() === props.question ? (
+      {props.transcript.toLowerCase() === props.question.toLowerCase() ? (
         <p>You got 10 points</p>
       ) : (
         <p>{`You have ${props.chances} more tries`}</p>

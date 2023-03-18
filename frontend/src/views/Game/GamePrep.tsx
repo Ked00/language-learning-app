@@ -16,9 +16,7 @@ export function GamePrep() {
   const navigate = useNavigate();
   const object = useObject();
   const redirect = useRedirectToGame();
-
-  console.log(object.object)
-
+  
   return (
     <div className="vh-100 border">
       <MainNavbar />
