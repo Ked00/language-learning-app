@@ -1,22 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {FormControl, Container} from "@mui/material";
 import {Row, Col} from "react-bootstrap";
-import axios from "axios";
 import {useGetHistory} from "../../business-logic/api-calls/getCorrect";
 
 // components
-import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {SelectOption} from "../../components/Inputs/SelectOption";
 
-// types
-import {useSelected} from "../../reuseable-hooks/selected";
-import {handleMouseDown} from "../../business-logic/speech-api/speech-to-text";
-
 export function History() {
-  const [language, setLanguage] = useState("");
-  const [filter, setFilter] = useState("");
   const getData = useGetHistory();
 
   useEffect(() => {}, [getData.response]);

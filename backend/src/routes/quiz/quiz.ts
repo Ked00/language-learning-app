@@ -42,13 +42,23 @@ router.post("/updateTest", (req: Request, res: Response) => {
   const incorrect: number = req.body.incorrect;
   const points: number = req.body.points;
 
-  req.session.stats = {
-    correct: correct,
-    incorrect: incorrect,
-    points: points,
-  };
-
-  console.log(req.session.stats);
+  if (req.session.stats) {
+    req.session.stats.push({
+      correct: correct,
+      incorrect: incorrect,
+      points: points,
+    });
+    req.session.save();
+  } else {
+    req.session.stats = [
+      {
+        correct: correct,
+        incorrect: incorrect,
+        points: points,
+      },
+    ];
+    req.session.save();
+  }
 });
 
 module.exports = router;

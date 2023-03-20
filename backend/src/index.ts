@@ -27,7 +27,7 @@ declare module "express-session" {
       correct: number;
       wrong: number;
     };
-    stats: {correct: number; incorrect: number; points: number};
+    stats: {correct: number; incorrect: number; points: number}[];
   }
 }
 

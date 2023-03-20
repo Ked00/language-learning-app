@@ -5,4 +5,4 @@ router.post("/", (req: Request, res: Response) => {
   res.send(req.session.stats);
 });
 
-module.exports = router;
+module.exports = router
