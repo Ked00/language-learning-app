@@ -19,14 +19,6 @@ export function History() {
   const [filter, setFilter] = useState("");
   const getData = useGetHistory();
 
-  const handleLanguage = (value: string) => {
-    setLanguage(value);
-  };
-
-  const handleFilter = (value: string) => {
-    setFilter(value);
-  };
-
   useEffect(() => {}, [getData.response]);
 
   const mapQuizResults = getData.response.map((item) => {
@@ -61,13 +53,12 @@ export function History() {
             label="Select language"
             id="language"
             item={[{text: "Spanish"}, {text: "English"}]}
-            getValue={handleLanguage}
           />
           <BlockButton
             text="View"
             type="contained"
             className="w-75 mb-5"
-            onClick={() => getData.api_call(language)}
+            onClick={() => getData.api_call("english")}
           />
         </FormControl>
 
