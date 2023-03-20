@@ -7,15 +7,13 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 import {updateTest} from "../../business-logic/api-calls/updateTest";
 
 import {gameProps} from "../../types/gameProps";
+import { useNavigate } from "react-router-dom";
 
 export function EndGame(props: gameProps) {
   const correct = props.points.correct;
   const total = props.getInfo.info.sentence;
   const points = props.points.points;
-
-  useEffect(() => {
-    updateTest(5, 10, 80);
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <div className="vh-100">
@@ -37,8 +35,8 @@ export function EndGame(props: gameProps) {
           <PriceCard label="Results: " content={`${correct} / ${total} `} />
         </div>
         <Stack gap={3} className="mt-3 ms-md-4">
-          <BlockButton type="outlined" text="Score report" />
-          <BlockButton type="contained" text="Play again" className="mb-3" />
+          <BlockButton type="outlined" text="Submit Test" onClick={()=> updateTest(correct, total, points)}/>
+          <BlockButton type="contained" text="Try again" className="mb-3" onClick={()=> navigate("/game")}/>
         </Stack>
       </Container>
     </div>

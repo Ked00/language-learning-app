@@ -54,7 +54,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: redisStore,
-    cookie: {maxAge: 600000}
+    cookie: {maxAge: 3600000000000} //100 years
   })
 );
 
