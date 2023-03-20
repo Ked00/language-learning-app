@@ -28,8 +28,6 @@ router.get("/getGameInfo", (req: Request, res: Response) => {
   const translated = language === "spanish" ? "english" : "spanish";
   const main = questionList[language as keyof typeof questionList];
 
-  req.session.main = main;
-
   res.send({
     details: req.session.gameInfo,
     questions: {
@@ -40,12 +38,19 @@ router.get("/getGameInfo", (req: Request, res: Response) => {
 });
 
 router.post("/updateTest", (req: Request, res: Response) => {
-  const correct: boolean = req.body.correct;
-  const index: number = req.body.index;
+  const correct: number = req.body.correct;
+  const incorrect: number = req.body.incorrect;
+  const points: number = req.body.points;
 
-  if (correct) {
-    req.session.main![index].correct = correct;
-  }
+  req.session.stats = {
+    correct: correct,
+    incorrect: incorrect,
+    points: points,
+  };
+
+  req.session.save();
+
+  console.log(req.session.stats);
 });
 
 module.exports = router;

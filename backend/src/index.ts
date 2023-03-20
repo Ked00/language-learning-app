@@ -26,7 +26,7 @@ declare module "express-session" {
       correct: number;
       wrong: number;
     };
-    main: {question: string; correct?: boolean; image: string}[];
+    stats: {correct: number; incorrect: number; points:number};
   }
 }
 
@@ -54,6 +54,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: redisStore,
+    cookie: {maxAge: 600000}
   })
 );
 

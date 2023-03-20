@@ -4,17 +4,10 @@ import { questionList } from "../../questions/questions";
 
 router.post("/", (req: Request, res: Response) => {
   const language = req.body.language;
-  const filter = req.body.filter;
   const questions = questionList[language as keyof typeof questionList];
   let list:{}[] = [];
 
-  for (let i = 0; i < questions.length; i++) {
-    if ((questions[i].correct == filter)) {
-      list.push(questions[i])
-    }
-  }
-
-  console.log(req.session.main![0].correct);
+  console.log(req.session.stats);
   res.send(list);
 });
 

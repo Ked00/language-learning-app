@@ -17,7 +17,6 @@ import {useVisible} from "../../reuseable-hooks/visible";
 
 import {gameProps} from "../../types/gameProps";
 import {Speaking} from "../../components/inGame/Speaking";
-import {updateTest} from "../../business-logic/api-calls/updateTest";
 
 export function Game(props: gameProps) {
   const chances = useChances();
@@ -43,7 +42,6 @@ export function Game(props: gameProps) {
       toggle.strict(false);
       props.points.increase();
       chances.restartChances(2);
-      updateTest(true, switchPage.currentIndex);
     } else if (chances.chancesLeft === 0) {
       chances.restartChances(2);
       toggle.strict(false);
@@ -55,8 +53,6 @@ export function Game(props: gameProps) {
       toggle.strict(false);
     }
   };
-
-  console.log(props.getInfo.info.questions.main)
 
   return (
     <div className="vh-100">

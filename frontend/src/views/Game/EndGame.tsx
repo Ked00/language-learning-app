@@ -1,12 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Stack} from "react-bootstrap";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {PriceCard} from "../../components/Cards/PriceCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
+import axios from "axios";
+
+import {updateTest} from "../../business-logic/api-calls/updateTest";
 
 import {gameProps} from "../../types/gameProps";
 
 export function EndGame(props: gameProps) {
+  const correct = props.points.correct;
+  const total = props.getInfo.info.sentence;
+  const points = props.points.points;
+
+  useEffect(() => {
+    updateTest(5, 10, 80);
+  }, []);
+
   return (
     <div className="vh-100">
       <MainNavbar />
@@ -23,11 +34,8 @@ export function EndGame(props: gameProps) {
         </div>
         <p className="my-2 p-2 fs-4 text-md-center">Here is your result</p>
         <div className="d-flex justify-content-center">
-          <PriceCard label="Score: " content={`${props.points.points} points`} />
-          <PriceCard
-            label="Results: "
-            content={`${props.points.correct} / ${props.getInfo.info.sentence} `}
-          />
+          <PriceCard label="Score: " content={`${points} points`} />
+          <PriceCard label="Results: " content={`${correct} / ${total} `} />
         </div>
         <Stack gap={3} className="mt-3 ms-md-4">
           <BlockButton type="outlined" text="Score report" />

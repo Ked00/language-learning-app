@@ -32,21 +32,21 @@ export function History() {
   const mapQuizResults = getData.response.map((item) => {
     return (
       <Container className="mb-4">
-          <Row className="h-25 w-100 mt-4 border rounded p-1 d-flex align-items-center">
-            <Col>
-              <div className="d-flex">
-                {/* <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" /> */}
-                <h3 className="p-2">5/10</h3>
-              </div>
-            </Col>
+        <Row className="h-25 w-100 mt-4 border rounded p-1 d-flex align-items-center">
+          <Col>
+            <div className="d-flex">
+              {/* <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" /> */}
+              <h3 className="p-2">5/10</h3>
+            </div>
+          </Col>
 
-            <Col className="text-end">
-              <h3>100</h3>
-            </Col>
-          </Row>
-          <Row className="text-center my-3 w-100">
-            <BlockButton type="contained" text="Try again" />
-          </Row>
+          <Col className="text-end">
+            <h3>100</h3>
+          </Col>
+        </Row>
+        <Row className="text-center my-3 w-100">
+          <BlockButton type="contained" text="Try again" />
+        </Row>
       </Container>
     );
   });
@@ -63,20 +63,14 @@ export function History() {
             item={[{text: "Spanish"}, {text: "English"}]}
             getValue={handleLanguage}
           />
-          <SelectOption
-            label="Select filter"
-            id="filter"
-            item={[{text: "All sentences"}, {text: "Correct"}, {text: "Wrong"}]}
-            getValue={handleFilter}
-          />
           <BlockButton
             text="View"
             type="contained"
             className="w-75 mb-5"
-            onClick={() => getData.api_call(language, filter)}
+            onClick={() => getData.api_call(language)}
           />
         </FormControl>
-        {/* make its own component */}
+
         <div className="w-100 h-100">
           <Container>
             <div className="d-flex justify-content-between w-100">

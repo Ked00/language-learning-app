@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export function updateTest(correct: boolean, index: number) {
+export function updateTest(correct: number, incorrect: number, points: number) {
   axios
     .post("quiz/updateTest", {
       correct: correct,
-      index: index,
+      incorrect: incorrect,
+      points: points,
     })
     .catch((err) => console.log(err));
 }

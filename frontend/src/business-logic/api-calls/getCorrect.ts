@@ -1,20 +1,18 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Filter1Sharp} from "@mui/icons-material";
 
 type outPut = {
-  api_call: (language: string, filter: string) => void;
-  response: {question: string; correct: boolean; topic: string}[];
+  api_call: (language: string) => void;
+  response: {correct: number; incorrect: number, points: number}[];
 };
 
 export function useGetHistory(): outPut {
-  const [response, setResponse] = useState([{question: "", correct: false, topic: ""}]);
+  const [response, setResponse] = useState([{correct: 0, incorrect:0, points: 0}]);
 
-  function getData(language: string, filter: string) {
+  function getData(language: string) {
     axios
-      .post("", {
+      .post("history", {
         language: language.toLowerCase(),
-        filter: filter == "Correct" ? true : false,
       })
       .then((res) => {
         setResponse(res.data);
