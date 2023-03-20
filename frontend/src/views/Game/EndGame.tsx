@@ -3,7 +3,6 @@ import {Container, Stack} from "react-bootstrap";
 import {MainNavbar} from "../../components/Navigation/MainNavbar";
 import {PriceCard} from "../../components/Cards/PriceCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
-import axios from "axios";
 
 import {updateTest} from "../../business-logic/api-calls/updateTest";
 
