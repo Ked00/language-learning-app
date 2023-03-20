@@ -11,25 +11,23 @@ import {SelectOption} from "../../components/Inputs/SelectOption";
 export function History() {
   const getData = useGetHistory();
 
-  useEffect(() => {}, [getData.response]);
+  useEffect(() => {
+  }, [getData.response]);
 
-  const mapQuizResults = getData.response.map((item) => {
+  const mapQuizResults = getData.response.map((item, index) => {
     return (
-      <Container className="mb-4">
+      <Container className="mb-4" key={index}>
         <Row className="h-25 w-100 mt-4 border rounded p-1 d-flex align-items-center">
           <Col>
             <div className="d-flex">
               {/* <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" /> */}
-              <h3 className="p-2">5/10</h3>
+              <h3 className="p-2">{`${item.correct} / ${item.incorrect}`}</h3>
             </div>
           </Col>
 
           <Col className="text-end">
-            <h3>100</h3>
+            <h3>{item.points}</h3>
           </Col>
-        </Row>
-        <Row className="text-center my-3 w-100">
-          <BlockButton type="contained" text="Try again" />
         </Row>
       </Container>
     );
