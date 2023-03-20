@@ -2,9 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import session from "express-session";
-import RedisStore from "connect-redis";
 import MongoStore from "connect-mongo";
-import {createClient} from "redis";
 const app = express();
 
 declare module "express-session" {
@@ -30,20 +28,6 @@ declare module "express-session" {
     stats: {correct: number; incorrect: number; points: number}[];
   }
 }
-
-let redisClient = createClient({
-  password: "KGxWLvohQj2VXXnhc4n0GHrgYNwsc9FX",
-  socket: {
-    host: "redis-12170.c283.us-east-1-4.ec2.cloud.redislabs.com",
-    port: 12170,
-  },
-});
-redisClient.connect().catch(console.error);
-
-let redisStore = new RedisStore({
-  client: redisClient,
-  prefix: "language-app",
-});
 
 // middleware
 app.use(express.json());
