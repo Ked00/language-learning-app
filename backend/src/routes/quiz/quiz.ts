@@ -47,7 +47,6 @@ router.post("/updateTest", (req: Request, res: Response) => {
     incorrect: incorrect,
     points: points,
   };
-  req.session.save();
 
   console.log(req.session.stats);
 });

@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import session from "express-session";
 import RedisStore from "connect-redis";
+import MongoStore from "connect-mongo";
 import {createClient} from "redis";
 const app = express();
 
@@ -26,16 +27,16 @@ declare module "express-session" {
       correct: number;
       wrong: number;
     };
-    stats: {correct: number; incorrect: number; points:number};
+    stats: {correct: number; incorrect: number; points: number};
   }
 }
 
 let redisClient = createClient({
-  password: 'KGxWLvohQj2VXXnhc4n0GHrgYNwsc9FX',
+  password: "KGxWLvohQj2VXXnhc4n0GHrgYNwsc9FX",
   socket: {
-      host: 'redis-12170.c283.us-east-1-4.ec2.cloud.redislabs.com',
-      port: 12170,
-  }
+    host: "redis-12170.c283.us-east-1-4.ec2.cloud.redislabs.com",
+    port: 12170,
+  },
 });
 redisClient.connect().catch(console.error);
 
@@ -53,8 +54,12 @@ app.use(
     secret: "the_guy_from_upwork",
     resave: false,
     saveUninitialized: true,
-    store: redisStore,
-    cookie: {maxAge: 3600000000000} //100 years
+    store: MongoStore.create({
+      collectionName: "sessions",
+      mongoUrl:
+        "mongodb+srv://allorganizedspace:h4dZj0lVS1ALVP0U@cluster0.9lvmotd.mongodb.net/?retryWrites=true&w=majority",
+    }),
+    cookie: {maxAge: 3600000000000}, //100 years
   })
 );
 
