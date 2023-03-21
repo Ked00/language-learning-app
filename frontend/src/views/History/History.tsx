@@ -4,7 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import {useGetHistory} from "../../business-logic/api-calls/getCorrect";
 
 // components
-import {MainNavbar} from "../../components/Navigation/MainNavbar";
+import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {SelectOption} from "../../components/Inputs/SelectOption";
 
@@ -35,7 +35,7 @@ export function History() {
 
   return (
     <div className="vh-100">
-      <MainNavbar />
+      <NavigationNavbar />
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">History</h1>
         <FormControl className="w-75 d-flex align-items-center">

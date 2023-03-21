@@ -59,6 +59,8 @@ router.post("/updateTest", (req: Request, res: Response) => {
     ];
     req.session.save();
   }
+
+  console.log(req.session.stats);
 });
 
 module.exports = router;

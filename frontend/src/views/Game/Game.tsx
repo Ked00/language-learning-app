@@ -11,7 +11,7 @@ import {Result} from "../../components/inGame/Result";
 
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
-import {MainNavbar} from "../../components/Navigation/MainNavbar";
+import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {useLoopArray} from "../../reuseable-hooks/loopArray";
 import {useVisible} from "../../reuseable-hooks/visible";
 
@@ -56,7 +56,7 @@ export function Game(props: gameProps) {
 
   return (
     <div className="vh-100">
-      <MainNavbar />
+      <NavigationNavbar />
 
       <div className="text-md-center">
         <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${props.getInfo.info.sentence}`}</h1>

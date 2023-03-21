@@ -4,14 +4,14 @@ import {useNavigate} from "react-router-dom";
 
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
-import {MainNavbar} from "../../components/Navigation/MainNavbar";
+import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {companyInfo} from "../../types/companyInfo";
 
 export function SuccessfulRegistration() {
   const navigate = useNavigate();
   return (
     <div className="vh-100">
-      <MainNavbar />
+      <NavigationNavbar />
       <div className="h-50 mt-5 mb-3 d-flex justify-content-center align-items-center">
         <img src="http://localhost:3000/images/succesfulRegistration.png"  />
       </div>

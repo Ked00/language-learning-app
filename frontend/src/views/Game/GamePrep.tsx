@@ -3,7 +3,7 @@ import {FormControl} from "@mui/material/";
 import {useNavigate} from "react-router-dom";
 
 // components
-import {MainNavbar} from "../../components/Navigation/MainNavbar";
+import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {SelectOption} from "../../components/Inputs/SelectOption";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
@@ -19,7 +19,7 @@ export function GamePrep() {
   
   return (
     <div className="vh-100 border">
-      <MainNavbar />
+      <NavigationNavbar />
       <div className="vh-100 d-flex flex-column align-items-center">
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">Select your game</h1>
         <FormControl className="w-75 d-flex align-items-center">

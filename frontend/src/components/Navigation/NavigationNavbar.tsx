@@ -1,16 +1,17 @@
 import React from "react";
 import {AppBar, Avatar} from "@mui/material/";
+import {useNavigate} from "react-router-dom";
 
 // TYPES
 import {companyInfo} from "../../types/companyInfo";
-import {SideMenu} from "./SideMenu";
 
 // components
+import {SideMenu} from "./SideMenu";
 import {Logo} from "../Logo/Logo";
-import {useNavigate} from "react-router-dom";
 
-export function MainNavbar() {
+export function NavigationNavbar() {
   const navigate = useNavigate();
+
   return (
     <AppBar
       className="p-4 position-static"
@@ -25,7 +26,6 @@ export function MainNavbar() {
             onClick={() => navigate("/profile")}
           />
         </div>
-
         <Logo width="50px" height="50px"/>
       </div>
     </AppBar>
