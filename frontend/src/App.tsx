@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 // views
-import {Onboarding} from "./views/onBoarding/Onboarding";
+import {Onboarding} from "./views/onBoarding/Login";
 import {SuccessfulRegistration} from "./views/onBoarding/SuccessfulRegistration";
 import {GamePrep} from "./views/Game/GamePrep";
 import {ContactPage} from "./views/contact/ContactPage";

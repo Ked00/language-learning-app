@@ -9,10 +9,9 @@ import {companyInfo} from "../../types/companyInfo";
 import {GoogleAuth} from "../../business-logic/authentication/GoogleAuth";
 import {FaceBookAuth} from "../../business-logic/authentication/FaceBookAuth";
 
-export function Onboarding() {
+export function Login() {
   const google = GoogleAuth();
   const faceBook = FaceBookAuth();
-  
   return (
     <div className="vh-100">
       <NoNavigationNav />

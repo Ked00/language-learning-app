@@ -70,7 +70,6 @@ export function Profile() {
           type="contained"
           className="w-100 my-3"
           background={companyInfo.company_color}
-          // there has to be a better way
           onClick={() =>
             updateUserInfo(user.email, updateInput.userInput, controlSelected.selected)
           }
