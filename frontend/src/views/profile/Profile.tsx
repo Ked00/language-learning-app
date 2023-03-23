@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
 import {Avatar, Container} from "@mui/material";
-import axios from "axios";
 
 import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 // components
@@ -12,18 +11,15 @@ import {FormGroup} from "../../components/Inputs/FormGroup";
 // types
 import {companyInfo} from "../../types/companyInfo";
 // hooks
-import {useUpdateInputValue} from "../../reuseable-hooks/textFieldInput";
 import {useSelected} from "../../reuseable-hooks/selected";
+import { useUserInfo } from "../../business-logic/api-calls/profile/userInfo";
 
 export function Profile() {
-  const [user, setUser] = useState({email: ""});
   const controlSelected = useSelected();
-  const updateInput = useUpdateInputValue();
+  const user = useUserInfo();
 
   useEffect(() => {
-    axios
-    .get("/profile/profileInfo")
-    .then((res) => setUser({email: res.data}));
+    user.getInfo();
   }, []);
 
   return (
@@ -44,25 +40,16 @@ export function Profile() {
             controlId="firstNameControl"
             label="First Name"
             name="first"
-            value={updateInput.userInput.first}
-            onChange={updateInput.updateInput}
+            value={user.info.first}
+            onChange={user.updateInfoObject}
           />
-
           <FormGroup
             controlId="lastNameControl"
             label="Last Name"
             name="last"
-            value={updateInput.userInput.last}
-            onChange={updateInput.updateInput}
+            value={user.info.last}
+            onChange={user.updateInfoObject}
           />
-
-          <div className="w-100 text-center mt-3">
-            <SelectLanguage
-              label="Native language"
-              className="w-100 text-dark"
-              controlSelected={controlSelected}
-            />
-          </div>
         </Form>
 
         <BlockButton
@@ -70,9 +57,7 @@ export function Profile() {
           type="contained"
           className="w-100 my-3"
           background={companyInfo.company_color}
-          onClick={() =>
-            updateUserInfo(user.email, updateInput.userInput, controlSelected.selected)
-          }
+          onClick={() => user.postNewInfo()}
         />
       </Container>
     </div>

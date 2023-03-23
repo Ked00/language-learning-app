@@ -11,7 +11,6 @@ router.post("/edit", async (req: Request, res: Response) => {
       {
         first_name: user.first_name,
         last_name: user.last_name,
-        native_language: user.native_language,
       }
     );
   } catch (err) {

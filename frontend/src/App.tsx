@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 // views
-import {Onboarding} from "./views/onBoarding/Login";
+import {Login} from "./views/onBoarding/Login";
 import {SuccessfulRegistration} from "./views/onBoarding/SuccessfulRegistration";
 import {GamePrep} from "./views/Game/GamePrep";
 import {ContactPage} from "./views/contact/ContactPage";
@@ -23,7 +23,7 @@ export function App() {
     <BrowserRouter>
       <Routes>
         {/* onboarding */}
-        <Route path="/" element={<Onboarding />} />
+        <Route path="/" element={<Login />} />
         <Route path="/successful" element={<SuccessfulRegistration />} />
         {/* game prep */}
         <Route path="/prep" element={<GamePrep />} />
@@ -33,7 +33,7 @@ export function App() {
         <Route path="/history" element={<History />} />
         {/* in game route */}
         <Route path="/game" element={<Game points={points} getInfo={getInfo} />} />
-        <Route path="/end" element={<EndGame results={points} />} />
+        <Route path="/end" element={<EndGame points={points} />} />
       </Routes>
     </BrowserRouter>
   );
