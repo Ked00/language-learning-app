@@ -1,17 +1,19 @@
 import React, {useState} from "react";
-import {auth, googleProvider} from "./firebaseConfig";
+import {auth, faceBookProvider, googleProvider} from "./firebaseConfig";
 import {signInWithPopup} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
-
-import {outPut} from "../../types/authOutput";
 import axios from "axios";
 
-export function GoogleAuth(): outPut {
-  const [value, setValue] = useState<string | null>("");
-  const navigate = useNavigate();
+import {authOutPut, authState} from "../types/authOutput";
 
-  const handleClick = async () => {
-    signInWithPopup(auth, googleProvider).then((res) => {
+export function useLogin(): authOutPut {
+  const [value, setValue] = useState<authState>("");
+  const navigate = useNavigate();
+  
+  const getAuthenticated = (provider: string) => {
+    const authProvider = provider == "facebook" ? faceBookProvider : googleProvider;
+
+    signInWithPopup(auth, authProvider).then((res) => {
       axios
         .post("auth/login", {
           email: res.user.email,
@@ -29,6 +31,6 @@ export function GoogleAuth(): outPut {
 
   return {
     value: value,
-    getAuthenticated: handleClick,
+    getAuthenticated: getAuthenticated,
   };
 }

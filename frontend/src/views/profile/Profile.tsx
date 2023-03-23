@@ -1,21 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Form} from "react-bootstrap";
 import {Avatar, Container} from "@mui/material";
 
-import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 // components
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
-import {SelectLanguage} from "../../components/Dialog/SelectLanguage";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {FormGroup} from "../../components/Inputs/FormGroup";
 // types
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 // hooks
-import {useSelected} from "../../reuseable-hooks/selected";
 import { useUserInfo } from "../../business-logic/api-calls/profile/userInfo";
 
 export function Profile() {
-  const controlSelected = useSelected();
   const user = useUserInfo();
 
   useEffect(() => {
@@ -33,7 +29,6 @@ export function Profile() {
           // src="https://lh3.googleusercontent.com/a/AEdFTp6lkeA83eNqexHSq1Svr-Y_mHngymXPNQIyIJ3r=s96-c"
         />
       </div>
-
       <Container>
         <Form className="d-flex flex-column justify-content-center align-items-center">
           <FormGroup
@@ -51,7 +46,6 @@ export function Profile() {
             onChange={user.updateInfoObject}
           />
         </Form>
-
         <BlockButton
           text="Confirm changes"
           type="contained"

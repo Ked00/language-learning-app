@@ -15,7 +15,7 @@ import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {usePageHook} from "../../reuseable-hooks/pageHook";
 import {useVisible} from "../../reuseable-hooks/visible";
 
-import {gameProps} from "../../types/gameProps";
+import {gameProps} from "../../business-logic/types/gameProps";
 import {Speaking} from "../../components/inGame/Speaking";
 
 export function Game(props: gameProps) {

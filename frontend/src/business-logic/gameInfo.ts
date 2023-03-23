@@ -1,6 +1,4 @@
-import {gameSettingInfo} from "../types/gameSettingInfo";
-
-export const languages: gameSettingInfo = [
+export const languages = [
   {data: "English"},
   {data: "Spanish"},
 ];

@@ -1,9 +1,8 @@
 import React from "react";
 
-//components
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 
-export function ContactPage() {
+export function ContactUsPage() {
   return (
     <div className="vh-100">
       <NavigationNavbar />

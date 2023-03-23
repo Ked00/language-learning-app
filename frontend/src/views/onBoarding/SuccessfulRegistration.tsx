@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 // components
 import {BlockButton} from "../../components/Buttons/BlockButton";
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 
 export function SuccessfulRegistration() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ export function SuccessfulRegistration() {
       <div className="h-50 mt-5 mb-3 d-flex justify-content-center align-items-center">
         <img src="http://localhost:3000/images/succesfulRegistration.png"  />
       </div>
-
       <div className="d-grid gap-3 p-4 text-center">
         <h1>Registration completed successfully </h1>
         <a href="/profile" className="text-dark">

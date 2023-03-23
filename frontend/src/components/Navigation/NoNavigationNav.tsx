@@ -2,7 +2,7 @@ import React from "react";
 import {AppBar} from "@mui/material/";
 
 // TYPES
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 
 export function NoNavigationNav() {
   return (

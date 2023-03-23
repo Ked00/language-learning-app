@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardContent, Typography} from "@mui/material";
 import {Col} from "react-bootstrap";
 // components
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 
 type Props = {
   label: string;

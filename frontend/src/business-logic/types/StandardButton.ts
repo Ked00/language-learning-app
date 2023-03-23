@@ -1,4 +1,4 @@
-export interface standardButton {
+export type standardButton = {
   type: "text" | "outlined" | "contained";
   text: string;
   background?: string;

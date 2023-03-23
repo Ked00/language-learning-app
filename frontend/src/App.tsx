@@ -5,9 +5,9 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Login} from "./views/onBoarding/Login";
 import {SuccessfulRegistration} from "./views/onBoarding/SuccessfulRegistration";
 import {GamePrep} from "./views/Game/GamePrep";
-import {ContactPage} from "./views/contact/ContactPage";
+import {ContactUsPage} from "./views/contact/ContactUsPage";
 import {Profile} from "./views/profile/Profile";
-import {EndGame} from "./views/Game/EndGame";
+import {GameResults} from "./views/Game/GameResults";
 import {History} from "./views/History/History";
 import {Game} from "./views/Game/Game";
 
@@ -28,12 +28,12 @@ export function App() {
         {/* game prep */}
         <Route path="/prep" element={<GamePrep />} />
         {/* side menu routes */}
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/history" element={<History />} />
         {/* in game route */}
         <Route path="/game" element={<Game points={points} getInfo={getInfo} />} />
-        <Route path="/end" element={<EndGame points={points} />} />
+        <Route path="/end" element={<GameResults points={points} />} />
       </Routes>
     </BrowserRouter>
   );

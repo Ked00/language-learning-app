@@ -7,7 +7,7 @@ import {SelectOption} from "../../components/Inputs/SelectOption";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 import {usePopulateObject} from "../../reuseable-hooks/populateObject";
 import {useSendGameInfo} from "../../business-logic/Game/useSendGameInfo";
 

@@ -9,7 +9,7 @@ import {updateTest} from "../../business-logic/api-calls/updateTest";
 import {results} from "../../business-logic/Game/gameinfo";
 import {useNavigate} from "react-router-dom";
 
-export function EndGame(props: results) {
+export function GameResults(props: results) {
   const {correct, points, totalSentences} = props;
   const navigate = useNavigate();
   return (

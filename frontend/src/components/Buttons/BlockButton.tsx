@@ -1,6 +1,6 @@
 import React from "react";
 import {Button} from "@mui/material";
-import { standardButton } from "../../types/Buttontypes";
+import { standardButton } from "../../business-logic/types/StandardButton";
 
 export function BlockButton(props: standardButton) {
   return (

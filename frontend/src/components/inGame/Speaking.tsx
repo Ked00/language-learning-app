@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "@mui/material";
 
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 import {handleMouseDown, handleMouseUp} from "../../business-logic/speech-api/speech-to-text";
 
 type Props = {

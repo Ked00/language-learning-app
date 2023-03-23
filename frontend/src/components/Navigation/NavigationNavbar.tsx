@@ -3,7 +3,7 @@ import {AppBar, Avatar} from "@mui/material/";
 import {useNavigate} from "react-router-dom";
 
 // TYPES
-import {companyInfo} from "../../types/companyInfo";
+import {companyInfo} from "../../business-logic/types/companyInfo";
 
 // components
 import {SideMenu} from "./SideMenu";
