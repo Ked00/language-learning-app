@@ -1,7 +1,7 @@
 import React from "react";
 import {Container} from "@mui/material";
 // components
-import {OnboardingNav} from "../../components/Navigation/OnboardingNav";
+import {NoNavigationNav} from "../../components/Navigation/NoNavigationNav";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 // types
 import {companyInfo} from "../../types/companyInfo";
@@ -15,7 +15,7 @@ export function Onboarding() {
   
   return (
     <div className="vh-100">
-      <OnboardingNav />
+      <NoNavigationNav />
       <div className="h-50 my-5 text-center">
         <img
           src="http://localhost:3000/images/onBoarding.jpg" 

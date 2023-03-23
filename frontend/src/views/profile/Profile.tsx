@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
 import {Avatar, Container} from "@mui/material";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 
 import {updateUserInfo} from "../../business-logic/api-calls/UserInfo";
 // components
@@ -19,7 +18,6 @@ import {useSelected} from "../../reuseable-hooks/selected";
 export function Profile() {
   const [user, setUser] = useState({email: ""});
   const controlSelected = useSelected();
-  const navigate = useNavigate();
   const updateInput = useUpdateInputValue();
 
   useEffect(() => {

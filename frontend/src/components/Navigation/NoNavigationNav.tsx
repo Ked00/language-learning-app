@@ -4,7 +4,7 @@ import {AppBar} from "@mui/material/";
 // TYPES
 import {companyInfo} from "../../types/companyInfo";
 
-export function OnboardingNav() {
+export function NoNavigationNav() {
   return (
     <AppBar className="p-4 position-static" sx={{background: companyInfo.company_color}}>
       <div className="d-flex justify-content-between align-items-center">
