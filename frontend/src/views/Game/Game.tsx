@@ -12,7 +12,7 @@ import {Result} from "../../components/inGame/Result";
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
-import {useLoopArray} from "../../reuseable-hooks/loopArray";
+import {usePageHook} from "../../reuseable-hooks/pageHook";
 import {useVisible} from "../../reuseable-hooks/visible";
 
 import {gameProps} from "../../types/gameProps";
@@ -21,12 +21,12 @@ import {Speaking} from "../../components/inGame/Speaking";
 export function Game(props: gameProps) {
   const chances = useChances();
   const toggle = useVisible(false);
-  const switchPage = useLoopArray(0, props.getInfo.info.sentence);
+  const pages = usePageHook(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
   const {Speak, speak_utils} = useSpeech();
-  const question = props.getInfo.info.questions.main[switchPage.currentIndex].question;
-  const translated = props.getInfo.info.questions.translated[switchPage.currentIndex].question;
-  const image = props.getInfo.info.questions.main[switchPage.currentIndex].image;
+  const question = props.getInfo.info.questions.main[pages.currentPage].question;
+  const translated = props.getInfo.info.questions.translated[pages.currentPage].question;
+  const image = props.getInfo.info.questions.main[pages.currentPage].image;
 
   useEffect(() => {
     props.getInfo.gameInfo();
@@ -36,16 +36,16 @@ export function Game(props: gameProps) {
   }, []);
 
   const next = () => {
-    switchPage.check(chances.chancesLeft);
+    pages.checkForMorePages(chances.chancesLeft);
     if (finalTranscript.toLowerCase() === question.toLowerCase()) {
-      switchPage.nextIndex();
+      pages.nextPage();
       toggle.strict(false);
       props.points.increase();
       chances.restartChances(2);
     } else if (chances.chancesLeft === 0) {
       chances.restartChances(2);
       toggle.strict(false);
-      switchPage.nextIndex();  
+      pages.nextPage();
     } else {
       chances.decreaseChances();
       props.points.decrease();
@@ -59,7 +59,9 @@ export function Game(props: gameProps) {
       <NavigationNavbar />
 
       <div className="text-md-center">
-        <h1 className="p-4">{`Sentence ${switchPage.currentIndex + 1} of ${props.getInfo.info.sentence}`}</h1>
+        <h1 className="p-4">{`Sentence ${pages.currentPage + 1} of ${
+          props.getInfo.info.sentence
+        }`}</h1>
         <Container>
           <LearningLangugaeQuestion text={question} />
           <NativeLanguageTranslation text={translated} />
@@ -90,7 +92,7 @@ export function Game(props: gameProps) {
               transcript={finalTranscript}
               chances={chances.chancesLeft}
               show={toggle.isVisible}
-              end={switchPage.isEnd}
+              end={pages.noMorePages}
               onClick={next}
             />
           )}

@@ -9,7 +9,7 @@ type Props = {
   content: string;
 };
 
-export function PriceCard(props: Props) {
+export function StatsCard(props: Props) {
   return (
     <Col className="p-2">
       <Card className="w-100 d-flex justify-content-center align-items-center text-center">

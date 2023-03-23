@@ -33,7 +33,7 @@ export function App() {
         <Route path="/history" element={<History />} />
         {/* in game route */}
         <Route path="/game" element={<Game points={points} getInfo={getInfo} />} />
-        <Route path="/end" element={<EndGame points={points} getInfo={getInfo} />} />
+        <Route path="/end" element={<EndGame results={points} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,7 +3,7 @@ export type gameProps = {
     info: {
       time: number;
       sentence: number;
-      questions: {main: [{question: string, image: string}]; translated: [{question: string}]};
+      questions: {main: [{question: string; image: string}]; translated: [{question: string}]};
       option: string;
     };
     gameInfo: () => void;

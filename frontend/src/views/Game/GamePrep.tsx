@@ -1,6 +1,5 @@
 import React from "react";
 import {FormControl} from "@mui/material/";
-import {useNavigate} from "react-router-dom";
 
 // components
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
@@ -9,14 +8,13 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
 import {companyInfo} from "../../types/companyInfo";
-import {useObject} from "../../reuseable-hooks/stateObject";
+import {useCollect} from "../../reuseable-hooks/collect";
 import {useRedirectToGame} from "../../business-logic/Game/RedirectToGame";
 
 export function GamePrep() {
-  const navigate = useNavigate();
-  const object = useObject();
+  const object = useCollect();
   const redirect = useRedirectToGame();
-  
+
   return (
     <div className="vh-100 border">
       <NavigationNavbar />
@@ -24,21 +22,21 @@ export function GamePrep() {
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">Select your game</h1>
         <FormControl className="w-75 d-flex align-items-center">
           <SelectOption
-            label="Select language"
+            label="Select object"
             id="language"
-            getValue={object.addKeyvalue}
+            getValue={object.setValue}
             item={[{text: "Spanish"}, {text: "English"}]}
           />
           <SelectOption
             label="Subject"
             id="subject"
-            getValue={object.addKeyvalue}
+            getValue={object.setValue}
             item={[{text: "Greetings"}]}
           />
           <SelectOption
             label="Game type"
             id="game-type"
-            getValue={object.addKeyvalue}
+            getValue={object.setValue}
             item={[
               {text: "Stress: You have 30 sec to answer each sentence"},
               {text: "Cool: You have 45 sec to answer each sentence"},
@@ -47,7 +45,7 @@ export function GamePrep() {
           <SelectOption
             label="Sentences"
             id="sentences"
-            getValue={object.addKeyvalue}
+            getValue={object.setValue}
             item={[{text: "10 sentences"}, {text: "20 sentences"}]}
           />
           <BlockButton
@@ -55,7 +53,7 @@ export function GamePrep() {
             type="contained"
             background={companyInfo.company_color}
             className="w-75 mt-3"
-            onClick={() => redirect.redirect(object.object)}
+            onClick={() => redirect.redirect(object.value)}
           />
         </FormControl>
       </div>

@@ -1,17 +1,16 @@
 import React from "react";
 import {Container, Stack} from "react-bootstrap";
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
-import {PriceCard} from "../../components/Cards/PriceCard";
+import {StatsCard} from "../../components/Cards/StatsCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
 import {updateTest} from "../../business-logic/api-calls/updateTest";
 
-import {gameProps} from "../../types/gameProps";
+import {results} from "../../business-logic/Game/gameinfo";
 import {useNavigate} from "react-router-dom";
 
-export function EndGame(props: gameProps) {
-  const {correct, points} = props.points;
-  const total = props.getInfo.info.sentence;
+export function EndGame(props: results) {
+  const {correct, points, totalSentences} = props;
   const navigate = useNavigate();
   return (
     <div className="vh-100">
@@ -29,14 +28,14 @@ export function EndGame(props: gameProps) {
         </div>
         <p className="my-2 fs-4 text-center">Here is your result</p>
         <div className="d-flex justify-content-center">
-          <PriceCard label="Score: " content={`${points} points`} />
-          <PriceCard label="Results: " content={`${correct} / ${total} `} />
+          <StatsCard label="Score: " content={`${points} points`} />
+          <StatsCard label="Results: " content={`${correct} / ${totalSentences} `} />
         </div>
         <Stack gap={3} className="mt-3 ms-4">
           <BlockButton
             type="outlined"
             text="Submit Test"
-            onClick={() => updateTest(correct, total, points)}
+            onClick={() => updateTest(correct, totalSentences, points)}
           />
           <BlockButton
             type="contained"
