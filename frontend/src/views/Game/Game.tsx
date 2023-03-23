@@ -57,7 +57,6 @@ export function Game(props: gameProps) {
   return (
     <div className="vh-100">
       <NavigationNavbar />
-
       <div className="text-md-center">
         <h1 className="p-4">{`Sentence ${pages.currentPage + 1} of ${
           props.getInfo.info.sentence
@@ -73,7 +72,6 @@ export function Game(props: gameProps) {
               height="600px"
             />
           </div>
-
           <BlockButton
             type="outlined"
             text="Listen"
@@ -85,7 +83,6 @@ export function Game(props: gameProps) {
             toggle={toggle.oppisiteOfCurrent}
             language={props.getInfo.info.option}
           />
-
           {toggle.isVisible && (
             <Result
               question={question}

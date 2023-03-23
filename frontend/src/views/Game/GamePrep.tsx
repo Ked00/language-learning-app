@@ -8,12 +8,12 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 
 // logic
 import {companyInfo} from "../../types/companyInfo";
-import {useCollect} from "../../reuseable-hooks/collect";
-import {useRedirectToGame} from "../../business-logic/Game/RedirectToGame";
+import {usePopulateObject} from "../../reuseable-hooks/populateObject";
+import {useSendGameInfo} from "../../business-logic/Game/useSendGameInfo";
 
 export function GamePrep() {
-  const object = useCollect();
-  const redirect = useRedirectToGame();
+  const object = usePopulateObject();
+  const sendInfo = useSendGameInfo();
 
   return (
     <div className="vh-100 border">
@@ -24,19 +24,19 @@ export function GamePrep() {
           <SelectOption
             label="Select object"
             id="language"
-            getValue={object.setValue}
+            getValue={object.newProperty}
             item={[{text: "Spanish"}, {text: "English"}]}
           />
           <SelectOption
             label="Subject"
             id="subject"
-            getValue={object.setValue}
+            getValue={object.newProperty}
             item={[{text: "Greetings"}]}
           />
           <SelectOption
             label="Game type"
             id="game-type"
-            getValue={object.setValue}
+            getValue={object.newProperty}
             item={[
               {text: "Stress: You have 30 sec to answer each sentence"},
               {text: "Cool: You have 45 sec to answer each sentence"},
@@ -45,7 +45,7 @@ export function GamePrep() {
           <SelectOption
             label="Sentences"
             id="sentences"
-            getValue={object.setValue}
+            getValue={object.newProperty}
             item={[{text: "10 sentences"}, {text: "20 sentences"}]}
           />
           <BlockButton
@@ -53,7 +53,7 @@ export function GamePrep() {
             type="contained"
             background={companyInfo.company_color}
             className="w-75 mt-3"
-            onClick={() => redirect.redirect(object.value)}
+            onClick={() => sendInfo.sendThenRedirect(object.values)}
           />
         </FormControl>
       </div>

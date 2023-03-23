@@ -6,7 +6,7 @@ type Props = {
 
 export function NativeLanguageTranslation(props: Props) {
   return (
-    <div className="mb-md-5">
+    <div className="mb-3">
       <img
         src="http://localhost:3000/images/logo.png"
         width="30px"
