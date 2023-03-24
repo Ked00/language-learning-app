@@ -4,9 +4,9 @@ import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
 import {StatsCard} from "../../components/Cards/StatsCard";
 import {BlockButton} from "../../components/Buttons/BlockButton";
 
-import {updateTest} from "../../business-logic/api-calls/updateTest";
+import {sendResults} from "../../business-logic/api-calls/sendResults";
 
-import {results} from "../../business-logic/Game/gameinfo";
+import {results} from "../../business-logic/Game/results";
 import {useNavigate} from "react-router-dom";
 
 export function GameResults(props: results) {
@@ -35,7 +35,7 @@ export function GameResults(props: results) {
           <BlockButton
             type="outlined"
             text="Submit Test"
-            onClick={() => updateTest(correct, totalSentences, points)}
+            onClick={() => sendResults(correct, totalSentences, points)}
           />
           <BlockButton
             type="contained"

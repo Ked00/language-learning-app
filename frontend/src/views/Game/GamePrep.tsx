@@ -24,20 +24,20 @@ export function GamePrep() {
           <SelectOption
             label="Select language"
             id="language"
-            getValue={object.newProperty}
-            item={[{text: "Spanish"}, {text: "English"}]}
+            valueOfSelected={object.newProperty}
+            optionsList={[{text: "Spanish"}, {text: "English"}]}
           />
           <SelectOption
             label="Subject"
             id="subject"
-            getValue={object.newProperty}
-            item={[{text: "Greetings"}]}
+            valueOfSelected={object.newProperty}
+            optionsList={[{text: "Greetings"}]}
           />
           <SelectOption
             label="Game type"
             id="game-type"
-            getValue={object.newProperty}
-            item={[
+            valueOfSelected={object.newProperty}
+            optionsList={[
               {text: "Stress: You have 30 sec to answer each sentence"},
               {text: "Cool: You have 45 sec to answer each sentence"},
             ]}
@@ -45,8 +45,8 @@ export function GamePrep() {
           <SelectOption
             label="Sentences"
             id="sentences"
-            getValue={object.newProperty}
-            item={[{text: "10 sentences"}, {text: "20 sentences"}]}
+            valueOfSelected={object.newProperty}
+            optionsList={[{text: "10 sentences"}, {text: "20 sentences"}]}
           />
           <BlockButton
             text="Speak"

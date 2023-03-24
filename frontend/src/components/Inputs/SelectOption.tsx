@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {Accordion, AccordionSummary, AccordionDetails} from "@mui/material/";
 import {ExpandMore} from "@mui/icons-material";
 // hooks
@@ -7,24 +7,24 @@ import {useSelected} from "../../reuseable-hooks/selected";
 type Props = {
   label: string;
   id: string;
-  item: {text: string}[];
+  optionsList: {text: string}[];
   onClick?: () => void;
-  getValue?: (value: string, id: string) => void;
+  valueOfSelected?: (value: string, id: string) => void;
 };
 
 export function SelectOption(props: Props) {
   const controlSelected = useSelected();
 
-  function click(text: string, id: string) {
+  function setNewSelected(text: string, id: string) {
     controlSelected.setSelected(text);
-    props.getValue!(text, id)
+    props.valueOfSelected!(text, id)
   }
 
-  const AccordionItems = props.item.map((item, index) => {
+  const AccordionItems = props.optionsList.map((item, index) => {
     return (
       <AccordionDetails
         key={index}
-        onClick={() => click(item.text, props.id)}
+        onClick={() => setNewSelected(item.text, props.id)}
         onMouseDown={props.onClick}
         onTouchStart={props.onClick}
       >

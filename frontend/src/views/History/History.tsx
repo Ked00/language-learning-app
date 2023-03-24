@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {FormControl, Container} from "@mui/material";
 import {Row, Col} from "react-bootstrap";
-import {useGetHistory} from "../../business-logic/api-calls/getCorrect";
+import {useGetHistory} from "../../business-logic/api-calls/getHistory";
 
 // components
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
@@ -21,7 +21,7 @@ export function History() {
           <Col>
             <div className="d-flex">
               {/* <img src="http://localhost:3000/images/logo.png" width="40px" height="40px" /> */}
-              <h3 className="p-2">{`${item.correct} / ${item.incorrect}`}</h3>
+              <h3 className="p-2">{`${item.correct} / ${item.totalSentences}`}</h3>
             </div>
           </Col>
 
@@ -42,13 +42,13 @@ export function History() {
           <SelectOption
             label="Select language"
             id="language"
-            item={[{text: "Spanish"}, {text: "English"}]}
+            optionsList={[{text: "Spanish"}, {text: "English"}]}
           />
           <BlockButton
             text="View"
             type="contained"
             className="w-75 mb-5"
-            onClick={() => getData.api_call("english")}
+            onClick={() => getData.get("english")}
           />
         </FormControl>
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function updateTest(correct: number, incorrect: number, points: number) {
+export function sendResults(correct: number, incorrect: number, points: number) {
   axios
     .post("quiz/updateTest", {
       correct: correct,

@@ -3,13 +3,13 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
 type outPut = {
-  sendThenRedirect: () => void;
+  postThenRedirect: (param: {[key: string]: string}) => void;
 };
 
-export function useSendGameInfo() {
+export function useSendGameInfo(): outPut {
   const navigate = useNavigate();
 
-  function sendThenRedirect(param: {[key: string]: string}) {
+  function postThenRedirect(param: {[key: string]: string}) {
     axios
       .post("quiz/setGameInfo", {
         language: param.language,
@@ -26,6 +26,6 @@ export function useSendGameInfo() {
   }
 
   return {
-    sendThenRedirect: sendThenRedirect,
+    postThenRedirect: postThenRedirect,
   };
 }
