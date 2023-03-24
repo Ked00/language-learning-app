@@ -8,7 +8,7 @@ type outPut = {
   checkForMorePages: (chances: number) => void;
 };
 
-export function usePageHook(current: number, maxIndexes: number): outPut {
+export function usePageInfo(current: number, maxIndexes: number): outPut {
   const [currentPage, setCurrentIndex] = useState(current);
   const [noMorePages, setNoMorePages] = useState(false);
 

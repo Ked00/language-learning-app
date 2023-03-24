@@ -1,7 +1,6 @@
 import React from "react";
 import {BlockButton} from "../Buttons/BlockButton";
 import {useNavigate} from "react-router-dom";
-import {useSpeechRecognition} from "react-speech-recognition";
 
 import { Correct } from "./Correct";
 import { Incorrect } from "./Incorrect";
@@ -30,8 +29,6 @@ export function Result(props: Props) {
       ) : (
         <p>{`You have ${props.chances} more tries`}</p>
       )}
-
-      {/* doesnt hide */}
 
       {!props.end ? (
         <BlockButton

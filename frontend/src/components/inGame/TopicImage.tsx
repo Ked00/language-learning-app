@@ -1,10 +1,14 @@
 import React from "react";
 
-export function TopicImage() {
+type Props = {
+  image: string
+}
+
+export function TopicImage(props: Props) {
   return (
     <div className="text-center mt-5">
       <img
-        src={require("../../images/car.png")}
+        src={`http://localhost:3000/images/${props.image}`}
         className="img-fluid"
         width="600px"
         height="600px"

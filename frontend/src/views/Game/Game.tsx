@@ -8,11 +8,12 @@ import {BlockButton} from "../../components/Buttons/BlockButton";
 import {LearningLangugaeQuestion} from "../../components/inGame/LearningLanguageQuestion";
 import {NativeLanguageTranslation} from "../../components/inGame/NativeLanguageTranslation";
 import {Result} from "../../components/inGame/Result";
+import { TopicImage } from "../../components/inGame/TopicImage";
 
 // hooks
 import {useChances} from "../../business-logic/Game/Chances";
 import {NavigationNavbar} from "../../components/Navigation/NavigationNavbar";
-import {usePageHook} from "../../reuseable-hooks/pageHook";
+import {usePageInfo} from "../../reuseable-hooks/pageInfo";
 import {useVisible} from "../../reuseable-hooks/visible";
 
 import {gameProps} from "../../business-logic/types/gameProps";
@@ -21,7 +22,7 @@ import {Speaking} from "../../components/inGame/Speaking";
 export function Game(props: gameProps) {
   const chances = useChances();
   const toggle = useVisible(false);
-  const pages = usePageHook(0, props.getInfo.info.sentence);
+  const pages = usePageInfo(0, props.getInfo.info.sentence);
   const {finalTranscript} = useSpeechRecognition();
   const {Speak, speak_utils} = useSpeech();
   const question = props.getInfo.info.questions.main[pages.currentPage].question;
@@ -64,14 +65,7 @@ export function Game(props: gameProps) {
         <Container>
           <LearningLangugaeQuestion text={question} />
           <NativeLanguageTranslation text={translated} />
-          <div className="text-center mt-5">
-            <img
-              src={`http://localhost:3000/images/${image}`}
-              className="img-fluid"
-              width="600px"
-              height="600px"
-            />
-          </div>
+          <TopicImage image={image} />
           <BlockButton
             type="outlined"
             text="Listen"

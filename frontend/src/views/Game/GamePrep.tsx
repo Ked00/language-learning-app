@@ -22,7 +22,7 @@ export function GamePrep() {
         <h1 className="p-md-5 p-4 mt-md-1 mt-3">Select your game</h1>
         <FormControl className="w-75 d-flex align-items-center">
           <SelectOption
-            label="Select object"
+            label="Select language"
             id="language"
             getValue={object.newProperty}
             item={[{text: "Spanish"}, {text: "English"}]}
