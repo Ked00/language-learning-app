@@ -14,7 +14,6 @@ export function FormGroup(props: Props) {
     <Form.Group className="w-100 mb-3" controlId={props.controlId}>
       <Form.Label>{props.label}</Form.Label>
       <Form.Control
-        // change placeHolder
         placeholder={props.label}
         value={props.value}
         onChange={props.onChange}

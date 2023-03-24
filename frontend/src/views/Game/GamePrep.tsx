@@ -53,7 +53,7 @@ export function GamePrep() {
             type="contained"
             background={companyInfo.company_color}
             className="w-75 mt-3"
-            onClick={() => sendInfo.sendThenRedirect(object.values)}
+            onClick={() => sendInfo.postThenRedirect(object.values)}
           />
         </FormControl>
       </div>
